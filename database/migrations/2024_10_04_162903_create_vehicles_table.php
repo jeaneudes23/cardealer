@@ -14,8 +14,7 @@ return new class extends Migration
     Schema::create('vehicles', function (Blueprint $table) {
       $table->id();
       $table->foreignId('brand_id')->nullable()->constrained()->onDelete('cascade');
-      $table->string('model');
-      $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
+      $table->foreignId('model_id')->nullable()->constrained()->onDelete('cascade');
       $table->enum('quality', ['used', 'new'])->nullable();
       $table->year('year');
       $table->integer('price');
