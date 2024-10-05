@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->foreignId('staff_id')->constrained('staff')->onDelete('cascade');
             $table->timestamp('date');
+            $table->text('message');
             $table->enum('status',['pending','cancelled','completed'])->default('pending');
             $table->timestamps();
         });

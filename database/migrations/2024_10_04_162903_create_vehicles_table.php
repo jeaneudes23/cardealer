@@ -22,7 +22,10 @@ return new class extends Migration
       $table->string('vin')->unique();     
       $table->json('colors')->nullable();  
       $table->enum('status', ['available', 'sold', 'pending'])->default('available');
+      $table->text('title')->unique();
+      $table->text('slug')->unique();
       $table->json('images');
+      $table->text('summary')->nullable();
       $table->text('description')->nullable();
       $table->tinyInteger('is_active')->default(1);
       $table->tinyInteger('is_featured')->default(0);
