@@ -21,6 +21,7 @@ class CategoryResource extends Resource
   protected static ?string $model = Category::class;
 
   protected static ?string $navigationIcon = 'ionicon-list';
+  protected static ?string $navigationGroup = 'Vehicles';
 
   public static function form(Form $form): Form
   {
@@ -30,13 +31,8 @@ class CategoryResource extends Resource
         ->columns(2)
         ->schema([
           Forms\Components\TextInput::make('name')
-            ->live(onBlur: true)
-            ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
             ->required()
             ->maxLength(255),
-          Forms\Components\Toggle::make('is_active')
-          ->default(1),
-          Forms\Components\Hidden::make('slug'),
         ])
       ]);
   }
@@ -49,9 +45,6 @@ class CategoryResource extends Resource
           ->searchable(),
         Tables\Columns\TextColumn::make('slug')
           ->searchable(),
-        Tables\Columns\TextColumn::make('is_active')
-          ->numeric()
-          ->sortable(),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()

@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('models', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
+            $table->foreignId('make_id')->nullable()->constrained('makes')->onDelete('cascade');
             $table->string('name');
-            $table->string('logo')->nullable();
             $table->string('slug')->unique();
-            $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
         });
     }

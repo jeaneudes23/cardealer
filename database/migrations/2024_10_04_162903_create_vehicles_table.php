@@ -13,21 +13,11 @@ return new class extends Migration
   {
     Schema::create('vehicles', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('brand_id')->nullable()->constrained()->onDelete('cascade');
-      $table->foreignId('model_id')->nullable()->constrained()->onDelete('cascade');
-      $table->enum('quality', ['used', 'new'])->nullable();
+      $table->foreignId('make_id')->constrained('makes')->onDelete('cascade');
+      $table->foreignId('model_id')->constrained('models')->onDelete('cascade');
       $table->year('year');
-      $table->integer('price');
-      $table->integer('mileage')->nullable();
-      $table->string('vin')->unique();     
-      $table->json('colors')->nullable();  
-      $table->enum('status', ['available', 'sold', 'pending'])->default('available');
-      $table->string('title')->unique();
+      $table->string('image')->nullable();
       $table->string('slug')->unique();
-      $table->json('images');
-      $table->text('summary')->nullable();
-      $table->text('description')->nullable();
-      $table->tinyInteger('is_active')->default(1);
       $table->tinyInteger('is_featured')->default(0);
       $table->timestamps();
     });

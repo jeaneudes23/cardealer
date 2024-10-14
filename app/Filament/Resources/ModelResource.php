@@ -6,7 +6,9 @@ use App\Filament\Resources\ModelResource\Pages;
 use App\Filament\Resources\ModelResource\RelationManagers;
 use App\Models\Brand;
 use App\Models\Model;
+use App\Models\VehicleModel;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -20,9 +22,11 @@ use Illuminate\Support\Str;
 
 class ModelResource extends Resource
 {
-  protected static ?string $model = Model::class;
+  protected static ?string $model = VehicleModel::class;
 
   protected static ?string $navigationIcon = 'ionicon-barcode-outline';
+  protected static ?string $navigationGroup = 'Vehicles';
+  protected static ?string $modelLabel = 'Model';
 
   public static function form(Form $form): Form
   {
@@ -31,18 +35,13 @@ class ModelResource extends Resource
         Forms\Components\Section::make('')
           ->columns(2)
           ->schema([
-            Forms\Components\Select::make('brand_id')
-            ->relationship('brand','name')
+            Forms\Components\Select::make('make_id')
+            ->relationship('make','name')
             ->searchable()
             ->preload(),
             Forms\Components\TextInput::make('name')
-              ->live(onBlur: true)
-              ->afterStateUpdated(fn($state, Get $get , Set $set) => $set('slug', Str::slug(Brand::find($get('brand_id'))->name.'-'.$state)))
               ->required()
               ->maxLength(255),
-            Forms\Components\Toggle::make('is_active')
-              ->default(1),
-            Forms\Components\Hidden::make('slug'),
           ])
       ]);
   }
@@ -51,15 +50,14 @@ class ModelResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\ImageColumn::make('brand.image')
-        ->label('Brand'),
+        Tables\Columns\ImageColumn::make('make.image')
+        ->label('Make'),
         Tables\Columns\TextColumn::make('name')
+          ->description(fn (VehicleModel $record) => $record->make->name)
           ->searchable(),
         Tables\Columns\TextColumn::make('slug')
-          ->searchable(),
-        Tables\Columns\TextColumn::make('is_active')
-          ->numeric()
-          ->sortable(),
+          ->searchable()
+          ->toggleable(isToggledHiddenByDefault: true),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()

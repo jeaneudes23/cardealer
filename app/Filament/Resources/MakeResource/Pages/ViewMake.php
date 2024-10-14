@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BrandResource\Pages;
+namespace App\Filament\Resources\MakeResource\Pages;
 
-use App\Filament\Resources\BrandResource;
+use App\Filament\Resources\MakeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewBrand extends ViewRecord
+class ViewMake extends ViewRecord
 {
-    protected static string $resource = BrandResource::class;
+    protected static string $resource = MakeResource::class;
 
     protected function getHeaderActions(): array
     {
