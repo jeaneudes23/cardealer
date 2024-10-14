@@ -22,8 +22,8 @@ return new class extends Migration
       $table->string('vin')->unique();     
       $table->json('colors')->nullable();  
       $table->enum('status', ['available', 'sold', 'pending'])->default('available');
-      $table->text('title')->unique();
-      $table->text('slug')->unique();
+      $table->string('title')->unique();
+      $table->string('slug')->unique();
       $table->json('images');
       $table->text('summary')->nullable();
       $table->text('description')->nullable();

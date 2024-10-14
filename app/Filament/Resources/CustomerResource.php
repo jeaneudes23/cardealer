@@ -6,35 +6,49 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerResource extends Resource
 {
   protected static ?string $model = Customer::class;
 
-  protected static ?string $navigationIcon = 'ionicon-people-circle-sharp';
+  protected static ?string $navigationIcon = 'heroicon-o-users';
 
   public static function form(Form $form): Form
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('name')
-          ->required()
-          ->maxLength(255),
-        Forms\Components\TextInput::make('email')
-          ->email()
-          ->required()
-          ->maxLength(255),
-        Forms\Components\DateTimePicker::make('email_verified_at'),
-        Forms\Components\TextInput::make('password')
-          ->password()
-          ->required()
-          ->maxLength(255),
+        Section::make()
+          ->columns(2)
+          ->schema([
+            Forms\Components\TextInput::make('name')
+              ->required()
+              ->maxLength(255),
+            Forms\Components\TextInput::make('email')
+              ->email()
+              ->required()
+              ->maxLength(255),
+            Forms\Components\TextInput::make('password')
+              ->required(fn (string $context): bool => $context == 'create')
+              ->password()
+              ->maxLength(255),
+            Select::make('role')
+              ->options([
+                'admin' => 'Admin',
+                'customer' => 'Customer'
+              ])
+              ->hiddenOn('create')
+              ->native(0)
+              ->required(),
+          ])
       ]);
   }
 
@@ -47,8 +61,10 @@ class CustomerResource extends Resource
         Tables\Columns\TextColumn::make('email')
           ->searchable(),
         Tables\Columns\TextColumn::make('email_verified_at')
+          ->toggleable(isToggledHiddenByDefault: true)
           ->dateTime()
           ->sortable(),
+        Tables\Columns\TextColumn::make('role'),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()
