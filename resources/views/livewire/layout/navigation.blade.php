@@ -18,7 +18,6 @@ new class extends Component
     public function logout(Logout $logout): void
     {
         $logout();
-
         $this->redirect('/', navigate: true);
     }
 
@@ -28,7 +27,7 @@ new class extends Component
     }
 }; ?>
 
-<nav id="navbar" x-data="{ open: false }" data-top="true" class="group/nav data-[top=false]:bg-background data-[top=false]:border-b transition-colors duration-200 z-50 sticky top-0 ">
+<nav id="navbar" x-data="{ open: false }" data-top="false" class="group/nav data-[top=false]:bg-background data-[top=false]:border-b transition-colors duration-200 z-50 sticky top-0 ">
     <!-- Primary Navigation Menu -->
     {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -179,3 +178,4 @@ new class extends Component
         </div>
     </div> --}}
 </nav>
+<script async src={{asset('storage/js/nav.js?v=')}}></script>

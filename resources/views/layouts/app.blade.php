@@ -29,7 +29,6 @@
     <main>
         {{ $slot }}
     </main>
-    <script src={{asset('storage/js/nav.js')}}></script>
 </body>
 
 </html>

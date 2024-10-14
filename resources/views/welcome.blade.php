@@ -48,7 +48,7 @@
             </div>
             <div class="grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-8 gap-y-12 justify-center">
                 @foreach ($cars as $car)
-                    <div class="shadow-xl">
+                    <a href="{{route('cars.show', $car->slug)}}" wire:navigate class="shadow-xl">
                         <img src={{ asset('storage/' . $car->image) }} class="aspect-video object-cover"
                             alt={{ $car->name }}>
                         <div class="bg-background p-4">
@@ -59,8 +59,11 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
+            </div>
+            <div class="flex justify-center">
+              <a href={{route('search')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
             </div>
         </div>
     </div>
@@ -71,13 +74,11 @@
         </div>
         <div class="container grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8">
             @foreach ($features as $key => $feature)
-                <div
-                    class="grid gap-2 content-start p-6 border cursor-pointer hover:bg-background/10 transition-colors">
-                    <span
-                        class="justify-self-start size-10 grid place-content-center bg-secondary font-bold font-header rounded-full">{{ $key + 1 }}</span>
-                    <h3 class="font-head text-xl font-semibold">{{ $feature->title }}</h3>
-                    <p class="text-background/80">{{ $feature->description }}</p>
-                </div>
+              <div class="grid content-start p-6 border cursor-pointer hover:bg-background/10 transition-colors">
+                  <span class="justify-self-start size-10 grid place-content-center bg-secondary font-bold font-header rounded-full">{{ $key + 1 }}</span>
+                  <h3 class="mt-6 mb-2 font-header text-xl uppercase font-semibold">{{ $feature->title }}</h3>
+                  <p class="text-background/80">{{ $feature->description }}</p>
+              </div>
             @endforeach
         </div>
     </div>
