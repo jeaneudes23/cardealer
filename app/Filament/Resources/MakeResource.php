@@ -6,8 +6,8 @@ use App\Filament\Resources\MakeResource\Pages;
 use App\Filament\Resources\MakeResource\RelationManagers;
 use App\Models\Make;
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,7 +19,7 @@ class MakeResource extends Resource
     protected static ?string $model = Make::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
-    protected static ?string $navigationGroup = 'Vehicles';
+    protected static ?string $navigationGroup = 'Cars';
 
     public static function form(Form $form): Form
     {
@@ -33,7 +33,7 @@ class MakeResource extends Resource
                 ->maxLength(255),
               Forms\Components\FileUpload::make('image')
                 ->image(),
-              Forms\Components\Hidden::make('slug'),
+              Toggle::make('is_featured'),
             ])
         ]);
     }
@@ -45,7 +45,8 @@ class MakeResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

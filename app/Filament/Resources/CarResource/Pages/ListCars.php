@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\VehicleResource\Pages;
+namespace App\Filament\Resources\CarResource\Pages;
 
-use App\Filament\Resources\VehicleResource;
+use App\Filament\Resources\CarResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListVehicles extends ListRecords
+class ListCars extends ListRecords
 {
-    protected static string $resource = VehicleResource::class;
+    protected static string $resource = CarResource::class;
 
     protected function getHeaderActions(): array
     {

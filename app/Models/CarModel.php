@@ -15,28 +15,30 @@ use Illuminate\Support\Str;
  * @property string $slug
  * @property string $brand_id
  */
-class VehicleModel extends Model
+
+class CarModel extends Model
 {
-    use HasFactory;
-    protected $table = 'models';
+  use HasFactory;
 
-    protected $guarded = [];
+  protected $guarded = [];
 
-    protected static function booted()
+  protected static function booted()
   {
-    static::creating(function(Model $model){
+    static::creating(function (Model $model) {
       $model->slug = Str::slug($model->name);
     });
-    static::updating(function(Model $model){
+    static::updating(function (Model $model) {
       $model->slug = Str::slug($model->name);
     });
   }
 
-  public function make(): BelongsTo{
+  public function make(): BelongsTo
+  {
     return $this->belongsTo(Make::class);
   }
 
-  public function vehicles(): HasMany{
-    return $this->hasMany(Vehicle::class);
+  public function cars(): HasMany
+  {
+    return $this->hasMany(Car::class);
   }
 }

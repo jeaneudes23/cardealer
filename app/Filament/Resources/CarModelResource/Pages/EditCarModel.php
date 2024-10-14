@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ModelResource\Pages;
+namespace App\Filament\Resources\CarModelResource\Pages;
 
-use App\Filament\Resources\ModelResource;
+use App\Filament\Resources\CarModelResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditModel extends EditRecord
+class EditCarModel extends EditRecord
 {
-    protected static string $resource = ModelResource::class;
+    protected static string $resource = CarModelResource::class;
 
     protected function getHeaderActions(): array
     {

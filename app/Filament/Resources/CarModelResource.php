@@ -2,31 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ModelResource\Pages;
-use App\Filament\Resources\ModelResource\RelationManagers;
-use App\Models\Brand;
-use App\Models\Model;
-use App\Models\VehicleModel;
+use App\Filament\Resources\CarModelResource\Pages;
+use App\Filament\Resources\CarModelResource\RelationManagers;
+use App\Models\CarModel;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
-
-class ModelResource extends Resource
+class CarModelResource extends Resource
 {
-  protected static ?string $model = VehicleModel::class;
+  protected static ?string $model = CarModel::class;
 
-  protected static ?string $navigationIcon = 'ionicon-barcode-outline';
-  protected static ?string $navigationGroup = 'Vehicles';
-  protected static ?string $modelLabel = 'Model';
+  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationGroup = 'Cars';
 
   public static function form(Form $form): Form
   {
@@ -36,12 +29,13 @@ class ModelResource extends Resource
           ->columns(2)
           ->schema([
             Forms\Components\Select::make('make_id')
-            ->relationship('make','name')
-            ->searchable()
-            ->preload(),
+              ->relationship('make', 'name')
+              ->searchable()
+              ->preload(),
             Forms\Components\TextInput::make('name')
               ->required()
               ->maxLength(255),
+            Toggle::make('is_featured'),
           ])
       ]);
   }
@@ -50,14 +44,13 @@ class ModelResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\ImageColumn::make('make.image')
-        ->label('Make'),
+        Tables\Columns\TextColumn::make('make.name')
+          ->numeric()
+          ->sortable(),
         Tables\Columns\TextColumn::make('name')
-          ->description(fn (VehicleModel $record) => $record->make->name)
           ->searchable(),
         Tables\Columns\TextColumn::make('slug')
-          ->searchable()
-          ->toggleable(isToggledHiddenByDefault: true),
+          ->searchable(),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()
@@ -91,10 +84,10 @@ class ModelResource extends Resource
   public static function getPages(): array
   {
     return [
-      'index' => Pages\ListModels::route('/'),
-      'create' => Pages\CreateModel::route('/create'),
-      'view' => Pages\ViewModel::route('/{record}'),
-      'edit' => Pages\EditModel::route('/{record}/edit'),
+      'index' => Pages\ListCarModels::route('/'),
+      'create' => Pages\CreateCarModel::route('/create'),
+      'view' => Pages\ViewCarModel::route('/{record}'),
+      'edit' => Pages\EditCarModel::route('/{record}/edit'),
     ];
   }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ModelResource\Pages;
+namespace App\Filament\Resources\CarResource\Pages;
 
-use App\Filament\Resources\ModelResource;
+use App\Filament\Resources\CarResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewModel extends ViewRecord
+class ViewCar extends ViewRecord
 {
-    protected static string $resource = ModelResource::class;
+    protected static string $resource = CarResource::class;
 
     protected function getHeaderActions(): array
     {

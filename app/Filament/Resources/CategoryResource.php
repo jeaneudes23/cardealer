@@ -6,6 +6,7 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
@@ -21,7 +22,7 @@ class CategoryResource extends Resource
   protected static ?string $model = Category::class;
 
   protected static ?string $navigationIcon = 'ionicon-list';
-  protected static ?string $navigationGroup = 'Vehicles';
+  protected static ?string $navigationGroup = 'Cars';
 
   public static function form(Form $form): Form
   {
@@ -33,6 +34,7 @@ class CategoryResource extends Resource
           Forms\Components\TextInput::make('name')
             ->required()
             ->maxLength(255),
+          Toggle::make('is_featured')
         ])
       ]);
   }

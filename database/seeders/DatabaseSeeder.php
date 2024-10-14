@@ -6,9 +6,11 @@ use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Make;
+use App\Models\CarModel;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -31,24 +33,49 @@ class DatabaseSeeder extends Seeder
 
 
     $makes = [
-      'BMW' => ['BMW 3 Series', 'BMW 5 Series', 'BMW 7 Series', 'BMW X3', 'BMW X5', 'BMW X7', 'BMW i3', 'BMW i8', 'BMW M3', 'BMW Z4'],
-      'Ford' => ['Ford F-150', 'Ford Mustang', 'Ford Explorer', 'Ford Escape', 'Ford Edge', 'Ford Fusion', 'Ford Ranger', 'Ford Bronco', 'Ford Transit', 'Ford Fiesta'],
-      'Toyota' => ['Toyota Camry', 'Toyota Corolla', 'Toyota RAV4', 'Toyota Hilux', 'Toyota Land Cruiser', 'Toyota Prius', 'Toyota Tacoma', 'Toyota Avalon', 'Toyota 4Runner', 'Toyota Supra'],
-      'Mercedes Benz' => ['Mercedes-Benz C-Class', 'Mercedes-Benz E-Class', 'Mercedes-Benz S-Class', 'Mercedes-Benz GLE', 'Mercedes-Benz GLC', 'Mercedes-Benz A-Class', 'Mercedes-Benz CLA', 'Mercedes-Benz G-Class', 'Mercedes-Benz EQC', 'Mercedes-Benz SL'],
+      'BMW' => ['BMW 3 Series', 'BMW 5 Series', 'BMW 7 Series'],
+      'Ford' => ['Ford F-150', 'Ford Mustang', 'Ford Explorer'],
+      'Toyota' => ['Toyota Camry', 'Toyota Corolla', 'Toyota RAV4', 'Toyota Hilux', 'Toyota Land Cruiser'],
+      'Mercedes Benz' => ['Mercedes Benz C-Class', 'Mercedes Benz E-Class'],
     ];
 
     foreach (array_keys($makes) as $key => $make) {
       /** @var Make $newmake */
-      $newMake = Make::create(['name' => $make,'image' => Str::slug($make).'.png',]);
+      $newMake = Make::create(['name' => $make, 'image' => Str::slug($make) . '.png', 'is_featured' => fake()->boolean(60)]);
       foreach ($makes[$make] as $key => $model) {
-        $newMake->models()->create(['name' => $model]);
+        /** @var CarModel $model */
+        $model = $newMake->models()->create(['name' => $model]);
+        $year = fake()->year();
+        $model->cars()->create([
+          'name' => $year.' '.$model->make->name.' '.$model->name,
+          'make_id' => $model->make_id,
+          'year' => $year,
+          'image' => $model->make->slug.'.jpg',
+        ]);
       }
     }
 
-    $categories = ['Sedans','SUVs','Hatchbacks','Coupes','Convertibles','Pickup Trucks','Minivans','Electric Vehicles','Hybrid Cars', 'Luxury Cars'];
-  
+    $categories = ['Sedans', 'SUVs', 'Hatchbacks', 'Coupes', 'Convertibles', 'Pickup Trucks', 'Minivans', 'Electric Vehicles', 'Hybrid Cars', 'Luxury Cars'];
+
     foreach ($categories as $key => $category) {
       Category::create(['name' => $category]);
     }
+
+    $features = [
+      [
+          'title' => 'Advanced Car Search',
+          'description' => 'Easily search for cars by make, model, price range, mileage, and other customizable filters for a personalized browsing experience.'
+      ],
+      [
+          'title' => 'Car Comparison Tool',
+          'description' => 'Compare multiple cars side by side based on specifications, features, and prices to help buyers make informed decisions.'
+      ],
+      [
+          'title' => 'Appointements',
+          'description' => 'View dealership profiles, contact details, and customer reviews to find trustworthy dealerships and streamline the buying process.'
+      ],
+    ];  
+
+    DB::table('features')->insert($features);
   }
 }

@@ -26,10 +26,10 @@ class Make extends Model
     }
   
     public function models(): HasMany{
-      return $this->hasMany(VehicleModel::class);
+      return $this->hasMany(CarModel::class);
     }
   
-    public function vehicles(): HasMany{
-      return $this->hasMany(VehicleModel::class);
+    public function cars(): HasMany{
+      return $this->hasMany(Car::class);
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('listings', function (Blueprint $table) {
       $table->id();
       $table->string('title')->unique();
-      $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade');
+      $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
       $table->enum('quality', ['new', 'used']);
       $table->integer('mileage')->nullable();
       $table->string('vin')->unique();
