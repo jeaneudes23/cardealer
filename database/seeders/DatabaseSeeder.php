@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Make;
 use App\Models\CarModel;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,25 +30,25 @@ class DatabaseSeeder extends Seeder
     ]);
 
 
-    $makes = [
+    $brands = [
       'BMW' => ['BMW 3 Series', 'BMW 5 Series', 'BMW 7 Series'],
       'Ford' => ['Ford F-150', 'Ford Mustang', 'Ford Explorer'],
       'Toyota' => ['Toyota Camry', 'Toyota Corolla', 'Toyota RAV4', 'Toyota Hilux', 'Toyota Land Cruiser'],
       'Mercedes Benz' => ['Mercedes Benz C-Class', 'Mercedes Benz E-Class'],
     ];
 
-    foreach (array_keys($makes) as $key => $make) {
-      /** @var Make $newmake */
-      $newMake = Make::create(['name' => $make, 'image' => Str::slug($make) . '.png', 'is_featured' => fake()->boolean(60)]);
-      foreach ($makes[$make] as $key => $model) {
+    foreach (array_keys($brands) as $key => $name) {
+      /** @var Brand $brand */
+      $brand = Brand::create(['name' => $name, 'image' => Str::slug($name) . '.png', 'is_featured' => fake()->boolean(60)]);
+      foreach ($brands[$name] as $key => $model) {
         /** @var CarModel $model */
-        $model = $newMake->models()->create(['name' => $model]);
+        $model = $brand->models()->create(['name' => $model]);
         $year = fake()->year();
         $model->cars()->create([
-          'name' => $year.' '.$model->make->name.' '.$model->name,
-          'make_id' => $model->make_id,
+          'name' => $year.' '.$model->brand->name.' '.$model->name,
+          'brand_id' => $model->brand_id,
           'year' => $year,
-          'image' => $model->make->slug.'.jpg',
+          'image' => $model->brand->slug.'.jpg',
         ]);
       }
     }

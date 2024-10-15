@@ -18,8 +18,9 @@ class CarModelResource extends Resource
 {
   protected static ?string $model = CarModel::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationIcon = 'heroicon-o-cpu-chip';
   protected static ?string $navigationGroup = 'Cars';
+  protected static ?string $navigationLabel = 'Models';
 
   public static function form(Form $form): Form
   {
@@ -28,12 +29,13 @@ class CarModelResource extends Resource
         Forms\Components\Section::make('')
           ->columns(2)
           ->schema([
-            Forms\Components\Select::make('make_id')
-              ->relationship('make', 'name')
+            Forms\Components\Select::make('brand_id')
+              ->relationship('brand', 'name')
               ->searchable()
               ->preload(),
             Forms\Components\TextInput::make('name')
               ->required()
+              ->unique(ignoreRecord:true)
               ->maxLength(255),
             Toggle::make('is_featured'),
           ])
@@ -44,7 +46,7 @@ class CarModelResource extends Resource
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('make.name')
+        Tables\Columns\TextColumn::make('brand.name')
           ->numeric()
           ->sortable(),
         Tables\Columns\TextColumn::make('name')

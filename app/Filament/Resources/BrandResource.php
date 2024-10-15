@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MakeResource\Pages;
-use App\Filament\Resources\MakeResource\RelationManagers;
-use App\Models\Make;
+use App\Filament\Resources\BrandResource\Pages;
+use App\Filament\Resources\BrandResource\RelationManagers;
+use App\Models\Brand;
 use Filament\Forms;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -14,10 +14,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MakeResource extends Resource
+class BrandResource extends Resource
 {
-    protected static ?string $model = Make::class;
-
+    protected static ?string $model = Brand::class;
+    
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?string $navigationGroup = 'Cars';
 
@@ -81,10 +81,10 @@ class MakeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMakes::route('/'),
-            'create' => Pages\CreateMake::route('/create'),
-            'view' => Pages\ViewMake::route('/{record}'),
-            'edit' => Pages\EditMake::route('/{record}/edit'),
+            'index' => Pages\ListBrands::route('/'),
+            'create' => Pages\CreateBrand::route('/create'),
+            'view' => Pages\ViewBrand::route('/{record}'),
+            'edit' => Pages\EditBrand::route('/{record}/edit'),
         ];
     }
 }

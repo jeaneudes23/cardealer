@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MakeResource\Pages;
+namespace App\Filament\Resources\BrandResource\Pages;
 
-use App\Filament\Resources\MakeResource;
+use App\Filament\Resources\BrandResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditMake extends EditRecord
+class EditBrand extends EditRecord
 {
-    protected static string $resource = MakeResource::class;
+    protected static string $resource = BrandResource::class;
 
     protected function getHeaderActions(): array
     {

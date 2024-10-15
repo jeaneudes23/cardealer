@@ -32,9 +32,9 @@ class CarModel extends Model
     });
   }
 
-  public function make(): BelongsTo
+  public function brand(): BelongsTo
   {
-    return $this->belongsTo(Make::class);
+    return $this->belongsTo(Brand::class);
   }
 
   public function cars(): HasMany

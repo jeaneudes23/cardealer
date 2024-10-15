@@ -34,13 +34,13 @@ class CarResource extends Resource
             ->columns(2)
             ->schema([
               TextInput::make('name')->required(),
-              Select::make('make_id')
-                ->relationship('make', 'name')
+              Select::make('brand_id')
+                ->relationship('brand', 'name')
                 ->searchable()
                 ->preload(),
               Select::make('car_model_id')
                 ->preload()
-                ->relationship(name: 'model', titleAttribute: 'name', modifyQueryUsing: fn(Builder $query, Get $get) => $query->where('make_id', $get('make_id')))
+                ->relationship(name: 'model', titleAttribute: 'name', modifyQueryUsing: fn(Builder $query, Get $get) => $query->where('brand_id', $get('brand_id')))
                 ->searchable(),
               Select::make('categories')
                 ->multiple()

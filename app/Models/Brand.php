@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
-class Make extends Model
+class Brand extends Model
 {
     use HasFactory;
 
@@ -16,12 +16,12 @@ class Make extends Model
   
     protected static function booted()
     {
-      static::creating(function(Make $make){
-        $make->slug = Str::slug($make->name);
+      static::creating(function(Brand $brand){
+        $brand->slug = Str::slug($brand->name);
       });
   
-      static::updating(function(Make $make){
-        $make->slug = Str::slug($make->name);
+      static::updating(function(Brand $brand){
+        $brand->slug = Str::slug($brand->name);
       });
     }
   

@@ -18,9 +18,9 @@
                     nihil.</p>
             </div>
             <div class="flex gap-x-6 gap-y-2">
-                @foreach ($makes as $make)
-                    <a href="{{route('search', ['make' => $make->slug])}}" wire:navigate class="flex-grow-0 flex-shrink-0">
-                        <img class="w-10" src={{ asset('storage/' . $make->image) }} alt="">
+                @foreach ($brands as $brand)
+                    <a href="{{route('search', ['brand' => $brand->slug])}}" wire:navigate class="flex-grow-0 flex-shrink-0">
+                        <img class="w-10" src={{ asset('storage/' . $brand->image) }} alt="">
                     </a>
                 @endforeach
             </div>
@@ -55,7 +55,7 @@
                             <h3 class="font-header font-semibold uppercase text-lg">{{ $car->name }}</h3>
                             <div>
                                 <p class="text-muted font-medium">
-                                    {{ $car->make->name }}
+                                    {{ $car->brand->name }}
                                 </p>
                             </div>
                         </div>

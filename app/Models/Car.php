@@ -33,8 +33,8 @@ class Car extends Model
 
   }
 
-  public function make(): BelongsTo{
-    return $this->belongsTo(Make::class);
+  public function brand(): BelongsTo{
+    return $this->belongsTo(Brand::class);
   }
   public function model(): BelongsTo{
     return $this->belongsTo(CarModel::class,'car_model_id');

@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string('name')->unique();
       $table->string('slug')->unique();
-      $table->foreignId('make_id')->constrained('makes')->onDelete('cascade');
+      $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
       $table->foreignId('car_model_id')->constrained('car_models')->onDelete('cascade');
       $table->year('year');
       $table->string('image')->nullable();

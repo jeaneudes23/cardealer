@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MakeResource\Pages;
+namespace App\Filament\Resources\FeatureResource\Pages;
 
-use App\Filament\Resources\MakeResource;
+use App\Filament\Resources\FeatureResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewMake extends ViewRecord
+class ViewFeature extends ViewRecord
 {
-    protected static string $resource = MakeResource::class;
+    protected static string $resource = FeatureResource::class;
 
     protected function getHeaderActions(): array
     {

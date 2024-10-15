@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
-use App\Models\Make;
+use App\Models\Brand;
 use App\Models\CarModel;
 use Livewire\Volt\Component;
 
@@ -12,7 +12,7 @@ new class extends Component
      */
 
   
-    public $makes;
+    public $brands;
     public $models;
 
     public function logout(Logout $logout): void
@@ -22,7 +22,7 @@ new class extends Component
     }
 
     public function mount(){
-      $this->makes = Make::take(5)->get();
+      $this->brands = Brand::take(5)->get();
       $this->models = CarModel::take(5)->get();
     }
 }; ?>
@@ -99,8 +99,8 @@ new class extends Component
           <div class="relative ">
             <div class="absolute left-0 bg-background shadow border w-40 rounded-lg p-2 pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-200">
               <div class="grid gap-1">
-                @foreach ($makes as $key => $make)
-                  <a href="{{route('search' , ['make' => $make->slug])}}" wire:navigate class="capitalize p-2 rounded-md hover:bg-muted-background transition-colors text-sm tracking-wide">{{$make->name}}</a>
+                @foreach ($brands as $key => $brand)
+                  <a href="{{route('search' , ['brand' => $brand->slug])}}" wire:navigate class="capitalize p-2 rounded-md hover:bg-muted-background transition-colors text-sm tracking-wide">{{$brand->name}}</a>
                 @endforeach
               </div>
             </div>

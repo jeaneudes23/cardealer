@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('car_models', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('make_id')->nullable()->constrained('makes')->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->unique();
             $table->tinyInteger('is_featured')->default(0);
