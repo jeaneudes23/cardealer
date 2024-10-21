@@ -20,10 +20,10 @@ Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('d
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 
+Volt::route('cars', 'pages.cars.index')->name('cars.index');
 Volt::route('cars/{slug}', 'pages.cars.show')->name('cars.show');
 Volt::route('sales', 'pages.sales.index')->name('sales.index');
 Volt::route('sales/{id}', 'pages.sales.show')->name('sales.show');
-Volt::route('search', 'pages.search')->name('search');
 Volt::route('compare', 'pages.compare')->name('compare');
 
 require __DIR__.'/auth.php';

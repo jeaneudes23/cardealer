@@ -92,15 +92,14 @@ new class extends Component {
     <div class="flex items-center gap-6">
       <div class="group hidden lg:block">
         <div class="inline-flex cursor-pointer items-center gap-4">
-          <span class="font-medium tracking-wide">Brands</span>
+          <span class="p-2 font-medium tracking-wide">Brands</span>
           <x-heroicon-o-chevron-down class="size-5" />
         </div>
         <div class="relative">
-          <div
-               class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+          <div class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
             <div class="grid gap-1">
               @foreach ($brands as $key => $brand)
-                <a href="{{ route('search', ['brand' => $brand->slug]) }}" wire:navigate
+                <a href="{{ route('cars.index', ['brand' => $brand->slug]) }}" wire:navigate
                    class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">{{ $brand->name }}</a>
               @endforeach
             </div>
@@ -109,16 +108,14 @@ new class extends Component {
       </div>
       <div class="group hidden lg:block">
         <div class="inline-flex cursor-pointer items-center gap-4">
-          <span class="font-medium tracking-wide">Models</span>
+          <span class="p-2 font-medium tracking-wide">Models</span>
           <x-heroicon-o-chevron-down class="size-5" />
         </div>
         <div class="relative">
-          <div
-               class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+          <div class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
             <div class="grid gap-1">
               @foreach ($models as $key => $model)
-                <a href="{{ route('search', ['model' => $model->slug]) }}" wire:navigate
-                   class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">{{ $model->name }}</a>
+                <a href="{{ route('cars.index', ['model' => $model->slug]) }}" wire:navigate class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">{{ $model->name }}</a>
               @endforeach
             </div>
           </div>
@@ -129,7 +126,7 @@ new class extends Component {
       <div class="hidden items-center gap-6 text-background group-data-[top=false]/nav:text-foreground lg:flex">
         <div class="group hidden lg:block">
           <div class="inline-flex cursor-pointer items-center gap-4">
-            <a href="{{ route('search') }}" wire:navigate class="px-2 font-medium uppercase">Find Cars</a>
+            <a href="{{ route('cars.index') }}" wire:navigate class="p-2 font-medium uppercase">Find Cars</a>
             <x-heroicon-o-chevron-down class="size-5" />
           </div>
           <div class="relative">

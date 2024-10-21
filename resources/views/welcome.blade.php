@@ -17,7 +17,7 @@
                     ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam magni beatae animi distinctio
                     nihil.</p>
             </div>
-            <form method="GET" action="search" class="flex p-4 shadow-md border max-w-3xl w-fit">
+            <form method="GET" action="cars" class="flex p-4 shadow-md border max-w-3xl w-fit">
                 <div class="grid">
                     <p class="capitalize font-medium">Brand or Model</p>
                     <input name="brand" class="border-0 focus:border-0 focus:ring-0 px-0 " type="text" placeholder="Find Now">
@@ -42,7 +42,7 @@
                 @endforeach
             </div>
             <div class="flex justify-center">
-              <a href={{route('search')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
+              <a href={{route('cars.index')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
             </div>
         </div>
     </div>
