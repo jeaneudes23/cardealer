@@ -42,11 +42,11 @@ class CarResource extends Resource
                 ->preload()
                 ->relationship(name: 'model', titleAttribute: 'name', modifyQueryUsing: fn(Builder $query, Get $get) => $query->where('brand_id', $get('brand_id')))
                 ->searchable(),
-              Select::make('categories')
+              Select::make('types')
                 ->multiple()
                 ->preload()
                 ->searchable()
-                ->relationship('categories', 'name'),
+                ->relationship('types', 'name'),
               Toggle::make('is_featured'),
               Forms\Components\TextInput::make('year')
                 ->required(),

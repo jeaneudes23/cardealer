@@ -1,12 +1,18 @@
 <?php
 
-use function Livewire\Volt\{state,layout};
+use App\Models\Car;
+
+use function Livewire\Volt\{computed, state, layout, with};
 
 //
-layout('layouts.app')
+state(['slug' => fn() => $slug]);
+
+with(fn () => ['car' => $this->slug]);
+layout('layouts.app');
 
 ?>
 
 <div>
-    //
+  {{ $slug }}
+  {{$car}}
 </div>

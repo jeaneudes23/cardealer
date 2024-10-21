@@ -2,10 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer utilities {
+  input,select {
+    @apply w-full
+  }
   .stack {
     @apply col-start-1 row-start-1
-  }
+}
   .rounded-custom{
     border-radius: 100% 0% 38% 62% / 0% 100% 0% 100% ;
   }
@@ -15,11 +20,11 @@
   }
 
   .py-section{
-    @apply py-16 xl:py-24
+    @apply py-12 xl:py-16
   }
 
   .my-section{
-    @apply my-16 xl:my-24
+    @apply my-12 xl:my-16
   }
 
 }

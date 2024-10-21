@@ -2,24 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
+use App\Filament\Resources\TypeResource\Pages;
+use App\Filament\Resources\TypeResource\RelationManagers;
+use App\Models\Type;
 use Filament\Forms;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
-
-class CategoryResource extends Resource
+class TypeResource extends Resource
 {
-  protected static ?string $model = Category::class;
+  protected static ?string $model = Type::class;
 
   protected static ?string $navigationIcon = 'ionicon-list';
   protected static ?string $navigationGroup = 'Cars';
@@ -29,13 +26,13 @@ class CategoryResource extends Resource
     return $form
       ->schema([
         Forms\Components\Section::make('')
-        ->columns(2)
-        ->schema([
-          Forms\Components\TextInput::make('name')
-            ->required()
-            ->maxLength(255),
-          Toggle::make('is_featured')
-        ])
+          ->columns(2)
+          ->schema([
+            Forms\Components\TextInput::make('name')
+              ->required()
+              ->maxLength(255),
+            Toggle::make('is_featured')
+          ])
       ]);
   }
 
@@ -80,10 +77,10 @@ class CategoryResource extends Resource
   public static function getPages(): array
   {
     return [
-      'index' => Pages\ListCategories::route('/'),
-      'create' => Pages\CreateCategory::route('/create'),
-      'view' => Pages\ViewCategory::route('/{record}'),
-      'edit' => Pages\EditCategory::route('/{record}/edit'),
+      'index' => Pages\ListTypes::route('/'),
+      'create' => Pages\CreateType::route('/create'),
+      'view' => Pages\ViewType::route('/{record}'),
+      'edit' => Pages\EditType::route('/{record}/edit'),
     ];
   }
 }

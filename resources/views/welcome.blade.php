@@ -17,27 +17,17 @@
                     ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam magni beatae animi distinctio
                     nihil.</p>
             </div>
-            <div class="flex gap-x-6 gap-y-2">
-                @foreach ($brands as $brand)
-                    <a href="{{route('search', ['brand' => $brand->slug])}}" wire:navigate class="flex-grow-0 flex-shrink-0">
-                        <img class="w-10" src={{ asset('storage/' . $brand->image) }} alt="">
-                    </a>
-                @endforeach
-            </div>
-            <div class="flex p-4 shadow-md border max-w-3xl w-fit">
+            <form method="GET" action="search" class="flex p-4 shadow-md border max-w-3xl w-fit">
                 <div class="grid">
                     <p class="capitalize font-medium">Brand or Model</p>
-                    <input class="border-none outline-none py-2 px-0 ring-transparent w-full" type="text"
-                        placeholder="Find Now">
+                    <input name="brand" class="border-0 focus:border-0 focus:ring-0 px-0 " type="text" placeholder="Find Now">
                 </div>
                 <div class="grid border-x px-6 mx-2">
                     <p>Maximun Price</p>
-                    <input class="border-none outline-none py-2 px-0 ring-transparent w-full" type="text"
-                        placeholder="10000000 RWF">
+                    <input name="max_price" class="border-0 focus:border-0 focus:ring-0 px-0" type="text" placeholder="10000000 RWF">
                 </div>
-                <button
-                    class="bg-secondary text-secondary-foreground font-medium tracking-wide capitalize font-header px-10 text-lg py-3 cursor-pointer">Search</button>
-            </div>
+                <button class="bg-secondary text-secondary-foreground font-medium tracking-wide capitalize font-header px-10 text-lg py-3 cursor-pointer">Search</button>
+            </form>
         </div>
     </div>
     <div class="my-section">
@@ -48,18 +38,7 @@
             </div>
             <div class="grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-8 gap-y-12 justify-center">
                 @foreach ($cars as $car)
-                    <a href="{{route('cars.show', $car->slug)}}" wire:navigate class="shadow-xl">
-                        <img src={{ asset('storage/' . $car->image) }} class="aspect-video object-cover"
-                            alt={{ $car->name }}>
-                        <div class="bg-background p-4">
-                            <h3 class="font-header font-semibold uppercase text-lg">{{ $car->name }}</h3>
-                            <div>
-                                <p class="text-muted font-medium">
-                                    {{ $car->brand->name }}
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                  <x-car-card :car="$car" wire:key="{{$car->id}}"/>
                 @endforeach
             </div>
             <div class="flex justify-center">

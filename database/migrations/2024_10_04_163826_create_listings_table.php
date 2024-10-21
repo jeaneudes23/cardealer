@@ -20,7 +20,9 @@ return new class extends Migration
       $table->integer('mileage')->nullable();
       $table->string('vin')->unique();
       $table->integer('price');
-      $table->json('colors');
+      $table->enum('currency', ['rwf','usd']);
+      $table->string('cover_image');
+      $table->json('images');
       $table->integer('quantity')->default(1);
       $table->tinyInteger('is_negotiable')->default(0);
       $table->tinyInteger('is_available')->default(0);

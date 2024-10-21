@@ -41,4 +41,8 @@ class CarModel extends Model
   {
     return $this->hasMany(Car::class);
   }
+
+  public static function whereBrandSlug(string $slug) {
+    return CarModel::whereHas('brand', function ($query) use($slug){$query->where('slug',$slug);});
+  }
 }

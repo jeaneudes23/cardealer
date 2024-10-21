@@ -5,13 +5,11 @@ use App\Models\Brand;
 use App\Models\CarModel;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     /**
      * Log the current user out of the application.
      */
 
-  
     public $brands;
     public $models;
 
@@ -21,15 +19,16 @@ new class extends Component
         $this->redirect('/', navigate: true);
     }
 
-    public function mount(){
-      $this->brands = Brand::take(5)->get();
-      $this->models = CarModel::take(5)->get();
+    public function mount()
+    {
+        $this->brands = Brand::take(5)->get();
+        $this->models = CarModel::take(5)->get();
     }
 }; ?>
 
-<nav id="navbar" x-data="{ open: false }" data-top="false" class="group/nav data-[top=false]:bg-background data-[top=false]:border-b transition-colors duration-200 z-50 sticky top-0 ">
-    <!-- Primary Navigation Menu -->
-    {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav id="navbar" x-data="{ open: false }" data-top="false" class="group/nav sticky top-0 z-50 transition-colors duration-200 data-[top=false]:border-b data-[top=false]:bg-background">
+  <!-- Primary Navigation Menu -->
+  {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -88,68 +87,76 @@ new class extends Component
             </div>
         </div>
     </div> --}}
-    <div class="container h-20 items-center flex gap-16">
-      <a href="/" wire:navigate class="uppercase font-medium text-lg font-header">{{env('APP_NAME','APP')}}</a>
-      <div class="flex items-center gap-6">
-        <div class="group hidden lg:block">
-          <div class="inline-flex items-center gap-4 cursor-pointer">
-            <span class="font-medium tracking-wide">Brands</span>
-            <x-heroicon-o-chevron-down class="size-5"/>
-          </div>
-          <div class="relative ">
-            <div class="absolute left-0 bg-background shadow border w-40 rounded-lg p-2 pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-200">
-              <div class="grid gap-1">
-                @foreach ($brands as $key => $brand)
-                  <a href="{{route('search' , ['brand' => $brand->slug])}}" wire:navigate class="capitalize p-2 rounded-md hover:bg-muted-background transition-colors text-sm tracking-wide">{{$brand->name}}</a>
-                @endforeach
-              </div>
-            </div>
-          </div>
+  <div class="container flex h-20 items-center gap-16">
+    <a href="/" wire:navigate class="font-header text-lg font-medium uppercase">{{ env('APP_NAME', 'APP') }}</a>
+    <div class="flex items-center gap-6">
+      <div class="group hidden lg:block">
+        <div class="inline-flex cursor-pointer items-center gap-4">
+          <span class="font-medium tracking-wide">Brands</span>
+          <x-heroicon-o-chevron-down class="size-5" />
         </div>
-        <div class="group hidden lg:block">
-          <div class="inline-flex items-center gap-4 cursor-pointer">
-            <span class="font-medium tracking-wide">Models</span>
-            <x-heroicon-o-chevron-down class="size-5"/>
-          </div>
-          <div class="relative ">
-            <div class="absolute left-0 bg-background shadow border w-40 rounded-lg p-2 pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-200">
-              <div class="grid gap-1">
-                @foreach ($models as $key => $model)
-                  <a href="{{route('search', ['model' => $model->slug])}}" wire:navigate class="capitalize p-2 rounded-md hover:bg-muted-background transition-colors text-sm tracking-wide">{{$model->name}}</a>
-                @endforeach
-              </div>
+        <div class="relative">
+          <div
+               class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+            <div class="grid gap-1">
+              @foreach ($brands as $key => $brand)
+                <a href="{{ route('search', ['brand' => $brand->slug]) }}" wire:navigate
+                   class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">{{ $brand->name }}</a>
+              @endforeach
             </div>
           </div>
         </div>
       </div>
-      <div class="flex grow justify-end items-center">
-        <div class="hidden lg:flex items-center gap-6 text-background group-data-[top=false]/nav:text-foreground">
-          <div class="group hidden lg:block">
-            <div class="inline-flex items-center gap-4 cursor-pointer">
-              <a href="{{route('search')}}" wire:navigate class="font-medium px-2 uppercase">Find Cars</a>
-              <x-heroicon-o-chevron-down class="size-5"/>
-            </div>
-            <div class="relative ">
-              <div class="absolute left-0 bg-background text-foreground shadow border w-40 rounded-lg p-2 pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-200">
-                <div class="grid gap-1">
-                  <a href="{{route('search', ['for_sale','true'])}}" wire:navigate class="capitalize p-2 rounded-md hover:bg-muted-background transition-colors text-sm tracking-wide">For Sale</a>
-                </div>
-              </div>
+      <div class="group hidden lg:block">
+        <div class="inline-flex cursor-pointer items-center gap-4">
+          <span class="font-medium tracking-wide">Models</span>
+          <x-heroicon-o-chevron-down class="size-5" />
+        </div>
+        <div class="relative">
+          <div
+               class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+            <div class="grid gap-1">
+              @foreach ($models as $key => $model)
+                <a href="{{ route('search', ['model' => $model->slug]) }}" wire:navigate
+                   class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">{{ $model->name }}</a>
+              @endforeach
             </div>
           </div>
-          <a href="{{route('compare')}}" wire:navigate class="font-medium px-2 uppercase">Compare Cars</a>
-          <a href="{{route('login')}}" wire:navigate class="font-medium px-2 uppercase">Login</a>
-          <a href="{{route('register')}}" wire:navigate class="bg-secondary text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">Register</a>  
         </div>
-        <button class="lg:hidden p-2 rounded-md border">
-          <x-heroicon-o-bars-3-center-left class="size-5"/>
-          <span class="sr-only">toggle open menu</span>
-        </button>
       </div>
     </div>
+    <div class="flex grow items-center justify-end">
+      <div class="hidden items-center gap-6 text-background group-data-[top=false]/nav:text-foreground lg:flex">
+        <div class="group hidden lg:block">
+          <div class="inline-flex cursor-pointer items-center gap-4">
+            <a href="{{ route('search') }}" wire:navigate class="px-2 font-medium uppercase">Find Cars</a>
+            <x-heroicon-o-chevron-down class="size-5" />
+          </div>
+          <div class="relative">
+            <div
+                 class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 text-foreground opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+              <div class="grid gap-1">
+                <a href="{{ route('sales.index') }}" wire:navigate
+                   class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">For
+                  Sale</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="{{ route('compare') }}" wire:navigate class="px-2 font-medium uppercase">Compare Cars</a>
+        <a href="{{ route('login') }}" wire:navigate class="px-2 font-medium uppercase">Login</a>
+        <a href="{{ route('register') }}" wire:navigate
+           class="bg-secondary px-6 py-3 font-medium uppercase tracking-wide text-secondary-foreground">Register</a>
+      </div>
+      <button class="rounded-md border p-2 lg:hidden">
+        <x-heroicon-o-bars-3-center-left class="size-5" />
+        <span class="sr-only">toggle open menu</span>
+      </button>
+    </div>
+  </div>
 
-    <!-- Responsive Navigation Menu -->
-    {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+  <!-- Responsive Navigation Menu -->
+  {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
@@ -178,4 +185,18 @@ new class extends Component
         </div>
     </div> --}}
 </nav>
-<script async src={{asset('storage/js/nav.js?v=')}}></script>
+
+@script
+  <script>
+    const navbar = document.querySelector('[data-top]')
+    const pageTop = document.querySelector('#page-top')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        navbar.setAttribute('data-top', `${entry.isIntersecting}`)
+      })
+    })
+
+    const path = window.location.pathname
+    path === '/' && observer.observe(pageTop)
+  </script>
+@endscript

@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\CarModel;
+use App\Models\Listing;
+use App\Models\Type;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,12 @@ class DatabaseSeeder extends Seeder
       'role' => 'admin'
     ]);
 
+    $types = ['Sedans', 'SUVs', 'Hatchbacks', 'Coupes', 'Convertibles', 'Pickup Trucks', 'Minivans', 'Electric Vehicles', 'Hybrid Cars', 'Luxury Cars'];
+
+    foreach ($types as $key => $type) {
+      Type::create(['name' => $type]);
+    }
+
 
     $brands = [
       'BMW' => ['BMW 3 Series', 'BMW 5 Series', 'BMW 7 Series'],
@@ -44,19 +51,17 @@ class DatabaseSeeder extends Seeder
         /** @var CarModel $model */
         $model = $brand->models()->create(['name' => $model]);
         $year = fake()->year();
-        $model->cars()->create([
-          'name' => $year.' '.$model->brand->name.' '.$model->name,
+        $car = $model->cars()->create([
+          'name' => $year.' '.$model->name,
           'brand_id' => $model->brand_id,
           'year' => $year,
           'image' => $model->brand->slug.'.jpg',
         ]);
+
+        $car->types()->attach([1,2]);
+
+        Listing::factory()->create(['car_id' => $car->id]);
       }
-    }
-
-    $categories = ['Sedans', 'SUVs', 'Hatchbacks', 'Coupes', 'Convertibles', 'Pickup Trucks', 'Minivans', 'Electric Vehicles', 'Hybrid Cars', 'Luxury Cars'];
-
-    foreach ($categories as $key => $category) {
-      Category::create(['name' => $category]);
     }
 
     $features = [
