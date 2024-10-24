@@ -9,6 +9,8 @@ export default {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
+    "./vendor/mattlibera/livewire-flash/src/publish/livewire-flash.php",
+    "./vendor/mattlibera/livewire-flash/src/views/livewire/*.blade.php",
   ],
 
   theme: {

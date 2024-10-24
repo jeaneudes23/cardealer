@@ -60,4 +60,5 @@ class User extends Authenticatable implements FilamentUser
     {
       return $this->role === 'admin';
     }
+    
 }

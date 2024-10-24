@@ -10,7 +10,7 @@ use Livewire\Volt\Volt;
 
 Route::get('/', function(){
   $features = Feature::get();
-  $cars = Car::with(['brand:id,name,slug','types:id,name'])->take(8)->get();
+  $cars = Car::with(['brand:id,name,slug','types:id,name'])->take(4)->get();
   // return response()->json(['cars' => $cars]);
   return view('welcome', compact('cars','features'));
 })->name('welcome');
@@ -25,5 +25,6 @@ Volt::route('cars/{slug}', 'pages.cars.show')->name('cars.show');
 Volt::route('sales', 'pages.sales.index')->name('sales.index');
 Volt::route('sales/{id}', 'pages.sales.show')->name('sales.show');
 Volt::route('compare', 'pages.compare')->name('compare');
+Volt::route('appointments', 'pages.appointments.index')->middleware('auth')->name('appointments.index');
 
 require __DIR__.'/auth.php';

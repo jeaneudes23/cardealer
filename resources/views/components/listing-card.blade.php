@@ -2,8 +2,7 @@
 
 <a href="{{ route('sales.show', $listing->id) }}" wire:navigate class="grid grid-cols-[300px,1fr] shadow-xl border">
   <div class="relative">
-    <img src="{{ asset('storage/' . $listing->cover_image) }}" class="absolute w-full h-full object-cover"
-         alt="{{ $listing->title }}">
+    <img src="{{ asset('storage/' . $listing->cover_image) }}" class="absolute w-full h-full object-cover" alt="{{ $listing->title }}">
     @if ($listing->is_negotiable)
       <div class="absolute left-0 top-0 bg-secondary p-2 text-xs font-semibold text-secondary-foreground">Negotiable
       </div>
@@ -23,7 +22,7 @@
     <div>
       <div class="flex items-center gap-6">
         <p>Year: {{ $listing->car->year }}</p>
-        <p>Quality: <span>{{ $listing->quality }}</span></p>
+        <p>Condition: <span>{{ $listing->condition }}</span></p>
         <p>Mileage: <span>{{ $listing->mileage }} KM</span></p>
       </div>
     </div>

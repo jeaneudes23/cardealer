@@ -16,14 +16,13 @@ return new class extends Migration
       $table->string('title')->unique();
       $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
-      $table->enum('quality', ['new', 'used']);
+      $table->enum('condition', ['new', 'used']);
       $table->integer('mileage')->nullable();
       $table->string('vin')->unique();
       $table->integer('price');
       $table->enum('currency', ['rwf','usd']);
       $table->string('cover_image');
       $table->json('images');
-      $table->integer('quantity')->default(1);
       $table->tinyInteger('is_negotiable')->default(0);
       $table->tinyInteger('is_available')->default(0);
       $table->timestamps();

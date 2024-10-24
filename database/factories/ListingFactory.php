@@ -22,13 +22,12 @@ class ListingFactory extends Factory
       //
       'cover_image' => fake()->randomElement($images) . '.webp',
       'title' => fake()->sentence(),
-      'quality' => fake()->randomElement(['new', 'used']),
-      'mileage' => fn(array $attributes) => $attributes['quality'] == 'used' ? fake()->numberBetween(5000, 200000) : 0,
+      'condition' => fake()->randomElement(['new', 'used']),
+      'mileage' => fn(array $attributes) => $attributes['condition'] == 'used' ? fake()->numberBetween(5000, 200000) : 0,
       'vin' => strtoupper(Str::random(17)),
       'price' => fake()->numberBetween(10000, 50000),
       'currency' => 'rwf',
       'images' => array_map(fn($image) => $image . '.webp', $images),
-      'quantity' => 1, 
       'is_negotiable' => fake()->boolean(), 
       'is_available' => 1,
     ];

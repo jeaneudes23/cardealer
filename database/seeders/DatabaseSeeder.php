@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
         $year = fake()->year();
         $car = $model->cars()->create([
           'name' => $year.' '.$model->name,
+          'summary' => fake()->paragraph(5),
           'brand_id' => $model->brand_id,
           'year' => $year,
           'image' => $model->brand->slug.'.jpg',

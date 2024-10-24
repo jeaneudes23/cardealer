@@ -20,7 +20,7 @@ class ListingResource extends Resource
 {
   protected static ?string $model = Listing::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationIcon = 'ionicon-car-outline';
 
   public static function form(Form $form): Form
   {
@@ -29,24 +29,23 @@ class ListingResource extends Resource
         Section::make()
           ->columns(2)
           ->schema([
-            Forms\Components\TextInput::make('title')
-              ->required()
-              ->maxLength(255),
             Forms\Components\Select::make('car_id')
               ->relationship('car', 'name')
+              ->searchable()
               ->required(),
-            Forms\Components\Select::make('quality')
+            Forms\Components\Select::make('condition')
               ->options([
                 'new' => 'New',
                 'used' => 'Used',
               ])
               ->native(0)
               ->required(),
-            Forms\Components\TextInput::make('mileage')
-              ->numeric(),
-            Forms\Components\TextInput::make('vin')
+            Forms\Components\TextInput::make('title')
               ->required()
               ->maxLength(255),
+            Forms\Components\TextInput::make('vin'),
+            Forms\Components\TextInput::make('mileage')
+              ->numeric(),
             Forms\Components\TextInput::make('price')
               ->required()
               ->numeric()
@@ -58,16 +57,16 @@ class ListingResource extends Resource
               ])
               ->native(0)
               ->live(),
+            Forms\Components\Toggle::make('is_negotiable'),
             Forms\Components\FileUpload::make('cover_image')
               ->image()
+              ->columnSpanFull()
               ->required(),
             Forms\Components\FileUpload::make('images')
+              ->image()
+              ->columnSpanFull()
+              ->maxFiles(4)
               ->multiple(),
-            Forms\Components\TextInput::make('quantity')
-              ->required()
-              ->numeric()
-              ->default(1),
-            Forms\Components\Toggle::make('is_negotiable'),
             Forms\Components\Toggle::make('is_available'),
           ])
 
@@ -79,28 +78,29 @@ class ListingResource extends Resource
     return $table
       ->columns([
         Tables\Columns\TextColumn::make('title')
+          ->wrap()
+          ->lineClamp(1)
           ->searchable(),
         Tables\Columns\TextColumn::make('car.name')
           ->numeric()
           ->sortable(),
-        Tables\Columns\TextColumn::make('quality'),
+        Tables\Columns\TextColumn::make('condition'),
         Tables\Columns\TextColumn::make('mileage')
           ->numeric()
+          ->toggleable(isToggledHiddenByDefault: true)
           ->sortable(),
         Tables\Columns\TextColumn::make('vin')
+          ->toggleable(isToggledHiddenByDefault: true)
           ->searchable(),
         Tables\Columns\TextColumn::make('price')
-          ->money()
+          ->suffix(fn (Listing $record) => Str::upper(' '.$record->currency))
           ->sortable(),
-        Tables\Columns\ImageColumn::make('cover_image'),
-        Tables\Columns\TextColumn::make('quantity')
-          ->numeric()
+        Tables\Columns\ImageColumn::make('cover_image')
+        ->toggleable(isToggledHiddenByDefault: true),
+        Tables\Columns\ToggleColumn::make('is_negotiable')
+          ->toggleable(isToggledHiddenByDefault: true)
           ->sortable(),
-        Tables\Columns\TextColumn::make('is_negotiable')
-          ->numeric()
-          ->sortable(),
-        Tables\Columns\TextColumn::make('is_available')
-          ->numeric()
+        Tables\Columns\ToggleColumn::make('is_available')
           ->sortable(),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()

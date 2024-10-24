@@ -87,8 +87,8 @@ new class extends Component {
             </div>
         </div>
     </div> --}}
-  <div class="container flex h-20 items-center gap-16">
-    <a href="/" wire:navigate class="font-header text-lg font-medium uppercase">{{ env('APP_NAME', 'APP') }}</a>
+  <div class="container flex h-20 items-center gap-16 ">
+    <a href="/" wire:navigate class="font-header font-medium uppercase text-lg tracking-wide">{{ env('APP_NAME', 'APP') }}</a>
     <div class="flex items-center gap-6">
       <div class="group hidden lg:block">
         <div class="inline-flex cursor-pointer items-center gap-4">
@@ -126,7 +126,7 @@ new class extends Component {
       <div class="hidden items-center gap-6 text-background group-data-[top=false]/nav:text-foreground lg:flex">
         <div class="group hidden lg:block">
           <div class="inline-flex cursor-pointer items-center gap-4">
-            <a href="{{ route('cars.index') }}" wire:navigate class="p-2 font-medium uppercase">Find Cars</a>
+            <a href="{{ route('cars.index') }}" wire:navigate class="p-2 font-medium capitalize">Find Cars</a>
             <x-heroicon-o-chevron-down class="size-5" />
           </div>
           <div class="relative">
@@ -140,10 +140,28 @@ new class extends Component {
             </div>
           </div>
         </div>
-        <a href="{{ route('compare') }}" wire:navigate class="px-2 font-medium uppercase">Compare Cars</a>
-        <a href="{{ route('login') }}" wire:navigate class="px-2 font-medium uppercase">Login</a>
-        <a href="{{ route('register') }}" wire:navigate
-           class="bg-secondary px-6 py-3 font-medium uppercase tracking-wide text-secondary-foreground">Register</a>
+        <a href="{{ route('compare') }}" wire:navigate class="px-2 font-medium capitalize">Compare Cars</a>
+        @guest
+        <a href="{{ route('login') }}" wire:navigate class="px-2 font-medium capitalize">Login</a>
+        <a href="{{ route('register') }}" wire:navigate class="bg-secondary px-6 py-3 font-medium capitalize tracking-wide text-secondary-foreground">Register</a>
+        @endguest
+        @auth
+        <a href="{{ route('appointments.index') }}" wire:navigate class="px-2 font-medium capitalize">Appointments</a>
+        <div class="group hidden lg:block">
+          <div class="inline-flex cursor-pointer items-center gap-4">
+            <span class="p-2 font-medium tracking-wide">Profile</span>
+            <x-heroicon-o-chevron-down class="size-5" />
+          </div>
+          <div class="relative">
+            <div class="pointer-events-none absolute right-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+              <div class="grid gap-1">
+                <a href="{{ route('profile') }}" wire:navigate class="p-2 rounded-md text-sm font-medium capitalize hover:bg-muted-background transition-colors">Profile</a>
+                <button wire:click="logout" class="p-2 rounded-md text-sm flex justify-start font-medium capitalize hover:bg-muted-background transition-colors">Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endauth
       </div>
       <button class="rounded-md border p-2 lg:hidden">
         <x-heroicon-o-bars-3-center-left class="size-5" />
