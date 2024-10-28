@@ -7,39 +7,37 @@ use App\Models\Type;
 
 use function Livewire\Volt\{computed, layout, state, usesPagination, with};
 
-/**
- * @property string $brand
- * @property string $year
- * @property string $model
- * @property string $for_sale
- */
 usesPagination();
 state(['per_page' => 12]);
-state(['for_sale'])->url();
 state(['years' => fn() => Car::distinct()->orderBy('year', 'asc')->pluck('year')]);
 state(['brand'])->url();
 state(['type'])->url();
 state(['model'])->url();
-state(['from'])->url();
-state(['to'])->url();
+state(['min_year'])->url();
+state(['max_year'])->url();
 state(['page'])->url();
-
-$toggleForSale = fn() => ($this->for_sale = !$this->for_sale);
 
 $brands = computed(fn() => Brand::get(['id', 'name', 'slug']))->persist();
 $types = computed(fn() => Type::get(['id', 'name', 'slug']))->persist();
 $models = computed(fn() => CarModel::whereHas('brand' , function($query){
-  $query->where('slug','like','%'.$this->brand.'%');
+  $query->where('slug',$this->brand);
 })->get(['id', 'name', 'slug', 'brand_id']));
-with(fn() => ['cars' => Car::search($this->brand)->paginate($this->per_page)]);
+with(fn() => ['cars' => Car::search(null,$this->brand,$this->model,$this->type,$this->min_year,$this->max_year)->paginate($this->per_page)]);
 
 layout('layouts.app');
 
 ?>
 
 <div class="my-12 container grid gap-6 lg:grid-cols-[300px,1fr] items-start">
-  <div class="sticky top-20">
-    <div class="grid gap-4">
+  <div class="border rounded-lg">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h3 class="text-xl font-semibold capitalize">Filters</h3>
+      <a href="{{route('cars.index')}}" wire:navigate class="inline-flex items-center gap-1 hover:underline">
+        <span class="p-1 bg-red-500 rounded-full text-gray-50"><x-lucide-x class="size-4"/></span>
+        <span class="text-sm font-semibold capitalize sr-only">clear</span>
+      </a>
+    </div>
+    <div class="grid gap-2 p-4">
       <div class="grid gap-2">
         <label for="brand" class="font-medium tracking-wide capitalize">Brand</label>
         <select wire:model.live="brand" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
@@ -60,7 +58,7 @@ layout('layouts.app');
       </div>
       <div class="grid gap-1">
         <label for="type" class="font-medium tracking-wide capitalize">Type</label>
-        <select wire:model.live="model" class="w-full rounded-lg" name="type" id="type" >
+        <select wire:model.live="type" class="w-full rounded-lg" name="type" id="type" >
           <option value="">All Types</option>
           @foreach ($this->types as $key => $type)
             <option value="{{ $type->slug }}">{{ $type->name }} </option>
@@ -70,13 +68,13 @@ layout('layouts.app');
       <div class="grid gap-2">
         <p class="font-medium tracking-wide capitalize">Years</p>
         <div class="flex items-center gap-2">
-        <select wire:model.live="from" name="from" id="from" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+        <select wire:model.live="min_year" name="min_year" id="min_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
           <option value="">Min</option>
           @foreach ($years as $year)
             <option value="{{ $year }}">{{ $year }}</option>
           @endforeach
         </select>
-        <select wire:model.live="to" name="to" id="to" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+        <select wire:model.live="max_year" name="max_year" id="max_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
           <option value="">Max</option>
           @foreach ($years as $year)
             <option value="{{ $year }}">{{ $year }}</option>
@@ -86,7 +84,7 @@ layout('layouts.app');
       </div>
     </div>
   </div>
-  <div class="pl-8 border-l">
+  <div>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
       @for ($i = 0; $i < $per_page; $i++)
         <div wire:loading class="aspect-square w-full animate-pulse bg-muted-background"></div>

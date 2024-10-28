@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('listings', function (Blueprint $table) {
       $table->id();
       $table->string('title')->unique();
+      
       $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
       $table->enum('condition', ['new', 'used']);

@@ -15,13 +15,17 @@
                     ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam magni beatae animi distinctio
                     nihil.</p>
             </div>
-            <form method="GET" action="cars" class="flex p-4 shadow-md border max-w-3xl w-fit">
-                <div class="grid">
-                    <p class="capitalize font-medium">Brand or Model</p>
-                    <input name="brand" class="border-0 focus:border-0 focus:ring-0 px-0 " type="text" placeholder="Find Now">
+            <form method="GET" action="sales" class="flex p-4 shadow-md border w-fit">
+                <div class="">
+                  <label for="condition" class="capitalize font-medium">Condition</label>
+                  <select name="condition" id="condition" class="border-0 focus:border-0 focus:ring-0 px-0" >
+                    <option value="">Any</option>
+                    <option value="used">Used</option>
+                    <option value="new">New</option>
+                  </select>
                 </div>
                 <div class="grid border-x px-6 mx-2">
-                    <p>Maximun Price</p>
+                    <lab for="max_price">Maximun Price</lab>
                     <input name="max_price" class="border-0 focus:border-0 focus:ring-0 px-0" type="text" placeholder="10000000 RWF">
                 </div>
                 <button class="bg-secondary text-secondary-foreground font-medium tracking-wide capitalize px-10 text-lg py-3 cursor-pointer">Search</button>

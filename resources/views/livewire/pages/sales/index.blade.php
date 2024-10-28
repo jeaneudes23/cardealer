@@ -34,23 +34,31 @@ $toggleForSale = fn() => ($this->for_sale = !$this->for_sale);
 $brands = computed(fn() => Brand::get(['id', 'name', 'slug']))->persist();
 $types = computed(fn() => Type::get(['id', 'name', 'slug']))->persist();
 $models = computed(fn() => CarModel::whereHas('brand' , function($query){
-  $query->where('slug','like','%'.$this->brand.'%');
+  $query->where('slug',$this->brand);
 })->get(['id', 'name', 'slug', 'brand_id']));
 
-with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
+with(fn() => ['listings' => Listing::search(null,$this->brand,$this->model,$this->type,$this->condition,$this->min_year,$this->max_year,$this->min_mileage,$this->max_mileage,$this->min_price,$this->max_price)->paginate($this->per_page)]);
+
 
 ?>
 
 <div class="mt-12 container">
   <div class="grid grid-cols-[300px,1fr] items-start gap-8">
-    <div class="sticky top-20 text-sm">
-      <div class="grid gap-2">
+    <div class="border rounded-lg">
+      <div class="flex justify-between items-center p-4 border-b">
+        <h3 class="text-xl font-semibold capitalize">Filters</h3>
+        <a href="{{route('sales.index')}}" wire:navigate class="inline-flex items-center gap-1 hover:underline">
+          <span class="p-1 bg-red-500 rounded-full text-gray-50"><x-lucide-x class="size-4"/></span>
+          <span class="text-sm font-semibold capitalize sr-only">clear</span>
+        </a>
+      </div>
+      <div class="grid gap-2 text-sm p-4 ">
         <div class="grid gap-2">
           <label for="condition" class="font-medium tracking-wide capitalize">Condition</label>
           <select wire:model.live="condition" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
             <option value="">All</option>
             <option value="used">Used</option>
-            <option value="used">New</option>
+            <option value="new">New</option>
           </select>
         </div>
         <div class="grid gap-2">
@@ -73,7 +81,7 @@ with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
         </div>
         <div class="grid gap-1">
           <label for="type" class="font-medium tracking-wide capitalize">Type</label>
-          <select wire:model.live="model" class="w-full rounded-lg" name="type" id="type" >
+          <select wire:model.live="type" class="w-full rounded-lg" name="type" id="type" >
             <option value="">All Types</option>
             @foreach ($this->types as $key => $type)
               <option value="{{ $type->slug }}">{{ $type->name }} </option>
@@ -100,15 +108,15 @@ with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
         <div class="grid gap-2">
           <p class="font-medium tracking-wide capitalize">Mileage</p>
           <div class="flex items-center gap-2">
-            <input type="text" wire:model="min_mileage" class="rounded-md" placeholder="Minimum">
-            <input type="text" wire:model="max_mileage" class="rounded-md" placeholder="Maxium">
+            <input type="number" wire:model="min_mileage" wire:model.blur="min_mileage" class="rounded-md" placeholder="Minimum">
+            <input type="number" wire:model="max_mileage" wire:model.blur="max_mileage" class="rounded-md" placeholder="Maxium">
           </div>
         </div>
         <div class="grid gap-2">
           <p class="font-medium tracking-wide capitalize">Price</p>
           <div class="flex items-center gap-2">
-            <input type="text" wire:model="min_price" class="rounded-md" placeholder="Minimum">
-            <input type="text" wire:model="max_price" class="rounded-md" placeholder="Maxium">
+            <input type="number" wire:model="min_price" class="rounded-md" wire:model.blur="min_price" placeholder="Minimum">
+            <input type="number" wire:model="max_price" class="rounded-md" wire:model.blur="max_price" placeholder="Maxium">
           </div>
         </div>
       </div>
@@ -120,6 +128,21 @@ with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
         @endfor
       </div>
       <div wire:loading.remove class="grid gap-6">
+        <div class="flex justify-end">
+          <div>
+            <button>
+              Sort
+            </button>
+            <div class="relative">
+              <div class="absolute right-0 whitespace-pre z-10 bg-background p-4 rounded-lg shadow">
+                <button>Price: Low To High</button>
+                <button>Price: High To Low</button>
+                <button>Mileage: Low To High</button>
+                <button>Mileage: High To Low</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
           @forelse ($listings as $listing)
             <x-listing-card :listing="$listing" wire:key="{{ $listing->id }}" />

@@ -30,6 +30,7 @@
   <main>
     {{ $slot }}
   </main>
+  <x-footer />
   @filamentScripts
 </body>
 

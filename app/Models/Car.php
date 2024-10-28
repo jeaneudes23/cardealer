@@ -56,7 +56,7 @@ class Car extends Model
     return $this->hasMany(Review::class);
   }
 
-  public static function search(string $q = null, string $brand = null, string $model = null, string $from = null, string $to = null): Builder
+  public static function search(?string $q = null, string $brand = null, string $model = null, string $type = null, string $min_year = null, string $max_year = null): Builder
   {
     $query = self::query();
 
@@ -77,12 +77,18 @@ class Car extends Model
       });
     }
 
-    if (filled($from)) {
-      $query->where('year', '>=', $from);
+    if (filled($type)) {
+      $query->whereHas('types', function ($inner) use ($type) {
+        $inner->where('slug', 'like', '%' . $type . '%');
+      });
     }
 
-    if (filled($to)) {
-      $query->where('year', '<=', $to);
+    if (filled($min_year)) {
+      $query->where('year', '>=', $min_year);
+    }
+
+    if (filled($max_year)) {
+      $query->where('year', '<=', $max_year);
     }
 
     return $query;

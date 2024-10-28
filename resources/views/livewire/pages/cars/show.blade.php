@@ -20,7 +20,7 @@ $setTab = fn($t) => ($this->tab = $t);
     <div class="grid content-center gap-4">
       <h2 class="text-4xl font-semibold">{{ $car->name }}</h2>
       <p class="text-lg">{{ $car->summary }}</p>
-      <a href="#listed" class="px-8 py-3 bg-secondary text-secondary-foreground font-medium justify-self-start rounded-md">On Sale</a>
+      <a href="#listed" class="px-8 py-3 bg-secondary text-secondary-foreground font-medium justify-self-start">On Sale</a>
     </div>
     <div>
       <img src="{{ asset('storage/' . $car->image) }}" class="rounded-lg" alt="">
