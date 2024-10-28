@@ -18,6 +18,7 @@ state(['per_page' => 12]);
 state(['for_sale'])->url();
 state(['years' => fn() => Car::distinct()->orderBy('year', 'asc')->pluck('year')]);
 state(['brand'])->url();
+state(['condition'])->url();
 state(['type'])->url();
 state(['model'])->url();
 state(['min_year'])->url();
@@ -43,7 +44,15 @@ with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
 <div class="mt-12 container">
   <div class="grid grid-cols-[300px,1fr] items-start gap-8">
     <div class="sticky top-20 text-sm">
-      <div class="grid gap-4">
+      <div class="grid gap-2">
+        <div class="grid gap-2">
+          <label for="condition" class="font-medium tracking-wide capitalize">Condition</label>
+          <select wire:model.live="condition" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
+            <option value="">All</option>
+            <option value="used">Used</option>
+            <option value="used">New</option>
+          </select>
+        </div>
         <div class="grid gap-2">
           <label for="brand" class="font-medium tracking-wide capitalize">Brand</label>
           <select wire:model.live="brand" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
