@@ -51,6 +51,11 @@ class Car extends Model
     return $this->hasMany(Listing::class);
   }
 
+  public function reviews(): HasMany
+  {
+    return $this->hasMany(Review::class);
+  }
+
   public static function search(string $q = null, string $brand = null, string $model = null, string $from = null, string $to = null): Builder
   {
     $query = self::query();
@@ -82,4 +87,10 @@ class Car extends Model
 
     return $query;
   }
+
+  public function related() {
+    return $this->brand->cars()->take(4)->get();
+  }
+
+
 }

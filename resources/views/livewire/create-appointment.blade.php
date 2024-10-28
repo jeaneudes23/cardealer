@@ -46,7 +46,7 @@ new class extends Component implements HasForms {
 
   public function create()
   {
-    $customer = Auth::user()?->id;
+    $customer = Auth::user();
     $message = "You will be updated on the status of your appointment";
     if (!$customer) {
       $customer = User::where('email',$this->data['email'])->first();
@@ -86,7 +86,7 @@ new class extends Component implements HasForms {
       {{ $this->form }}
       <div class="mt-8 grid">
         <button type="submit" class="bg-secondary py-2 text-lg font-medium uppercase tracking-wide text-secondary-foreground inline-flex items-center justify-center gap-2">
-          <span wire:loading> <x-ionicon-reload class="size-5 animate-spin"/> </span>
+          <span wire:loading><x-lucide-loader-circle class="size-5 animate-spin"/></span>
           Submit
         </button>
       </div>

@@ -12,6 +12,6 @@
         <span class="text-sm font-medium text-muted">{{ $type->name }},</span>
       @endforeach
     </div>
-    <h3 class="font-header text-lg font-semibold uppercase">{{ $car->name }}</h3>
+    <h3 class="text-lg font-semibold uppercase">{{ $car->name }}</h3>
   </div>
 </a>

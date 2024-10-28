@@ -40,4 +40,8 @@ class Customer extends Model
   public function appointments(): HasMany{
     return $this->hasMany(Appointment::class);
   }
+
+  public function reviews(): HasMany{
+    return $this->hasMany(Review::class);
+  }
 }

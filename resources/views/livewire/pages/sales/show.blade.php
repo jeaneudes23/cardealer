@@ -13,7 +13,7 @@ with(fn() => ['listing' => Listing::with(['car.model:id,name,slug', 'car.brand:i
 
 
 $setTab = function($t) {
-  $this->tab = $t;
+ $this->tab = $t;
 };
 
 ?>
