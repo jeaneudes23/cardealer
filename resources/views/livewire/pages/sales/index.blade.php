@@ -6,7 +6,7 @@ use function Livewire\Volt\{layout, state, usesPagination, with};
 
 usesPagination();
 layout('layouts.app');
-state(['per_page' => 3]);
+state(['per_page' => 10]);
 
 with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
 
@@ -17,27 +17,21 @@ with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
     <div>
       Filters
     </div>
-    <div >
-      <div wire:loading.class.remove="hidden" class="space-y-8 hidden">
+    <div>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
         @for ($i = 0; $i < $per_page; $i++)
-          <div class="grid grid-cols-[300px,1fr] shadow-xl border">
-            <div class="bg-gray-200 aspect-video"></div>
-            <div class="space-y-2 gap-2 p-4">
-              <div class="h-2 rounded-md bg-gray-200 animate-pulse w-20"></div>
-              <div class="h-2 rounded-md bg-gray-200 animate-pulse w-3/4"></div>
-              <div class="h-2 rounded-md bg-gray-200 animate-pulse w-3/4"></div>
-              <div class="h-2 rounded-md bg-gray-200 animate-pulse w-20"></div>
-            </div>
-          </div>
+          <div wire:loading.class.remove="hidden" class="hidden aspect-square animate-pulse rounded-lg bg-gray-200"></div>
         @endfor
       </div>
-      <div wire:loading.remove class="grid gap-8">
-        @forelse ($listings as $listing)
-          <x-listing-card :listing="$listing" wire:key="{{ $listing->id }}" />
-        @empty
-        @endforelse
+      <div wire:loading.remove class="grid gap-6">
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
+          @forelse ($listings as $listing)
+            <x-listing-card :listing="$listing" wire:key="{{ $listing->id }}" />
+          @empty
+          @endforelse
+        </div>
         <div>
-          {{$listings->links()}}
+          {{ $listings->links() }}
         </div>
       </div>
     </div>

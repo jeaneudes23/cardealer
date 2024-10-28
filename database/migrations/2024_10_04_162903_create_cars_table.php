@@ -17,13 +17,24 @@ return new class extends Migration
       $table->string('slug');
       $table->text('summary');
       $table->text('overview')->nullable();
-      $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
-      $table->foreignId('car_model_id')->constrained('car_models')->onDelete('cascade');
-      $table->year('year');
       $table->string('image')->nullable();
       $table->tinyInteger('is_featured')->default(0);
       $table->decimal('average_rating', 3 , 1)->default(0);
       $table->integer('reviews_count')->default(0);
+      
+      
+      // Specs
+      $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
+      $table->foreignId('car_model_id')->constrained('car_models')->onDelete('cascade');
+      $table->year('year');
+      $table->string('engine_type')->nullable();
+      $table->string('horse_power')->nullable();
+      $table->string('top_speed')->nullable();
+      $table->string('transmission')->nullable();
+      $table->string('fuel_type')->nullable();
+      $table->string('seats')->nullable();
+      $table->text('features')->nullable();
+
       $table->timestamps();
     });
   }
