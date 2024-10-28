@@ -1,21 +1,108 @@
 <?php
 
+use App\Models\Brand;
+use App\Models\Car;
+use App\Models\CarModel;
 use App\Models\Listing;
+use App\Models\Type;
 
-use function Livewire\Volt\{layout, state, usesPagination, with};
+use function Livewire\Volt\{computed, layout, state, usesPagination, with};
 
 usesPagination();
 layout('layouts.app');
-state(['per_page' => 10]);
+
+
+
+usesPagination();
+state(['per_page' => 12]);
+state(['for_sale'])->url();
+state(['years' => fn() => Car::distinct()->orderBy('year', 'asc')->pluck('year')]);
+state(['brand'])->url();
+state(['type'])->url();
+state(['model'])->url();
+state(['min_year'])->url();
+state(['max_year'])->url();
+state(['min_price'])->url();
+state(['min_mileage'])->url();
+state(['max_price'])->url();
+state(['max_mileage'])->url();
+state(['page'])->url();
+
+$toggleForSale = fn() => ($this->for_sale = !$this->for_sale);
+
+$brands = computed(fn() => Brand::get(['id', 'name', 'slug']))->persist();
+$types = computed(fn() => Type::get(['id', 'name', 'slug']))->persist();
+$models = computed(fn() => CarModel::whereHas('brand' , function($query){
+  $query->where('slug','like','%'.$this->brand.'%');
+})->get(['id', 'name', 'slug', 'brand_id']));
 
 with(fn() => ['listings' => Listing::search()->paginate($this->per_page)]);
 
 ?>
 
-<div class="py-section container">
-  <div class="grid grid-cols-[300px,1fr] gap-8">
-    <div>
-      Filters
+<div class="mt-12 container">
+  <div class="grid grid-cols-[300px,1fr] items-start gap-8">
+    <div class="sticky top-20 text-sm">
+      <div class="grid gap-4">
+        <div class="grid gap-2">
+          <label for="brand" class="font-medium tracking-wide capitalize">Brand</label>
+          <select wire:model.live="brand" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
+            <option value="">All Brands</option>
+            @foreach ($this->brands as $key => $b)
+              <option value="{{ $b->slug }}">{{ $b->name }}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="grid gap-1">
+          <label for="model" class="font-medium tracking-wide capitalize">Model</label>
+          <select wire:key="{{ $brand }}" wire:model.live="model" class="w-full rounded-lg" name="model"id="model" >
+            <option value="">All Models</option>
+            @foreach ($this->models as $key => $model)
+              <option value="{{ $model->slug }}">{{ $model->name }} </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="grid gap-1">
+          <label for="type" class="font-medium tracking-wide capitalize">Type</label>
+          <select wire:model.live="model" class="w-full rounded-lg" name="type" id="type" >
+            <option value="">All Types</option>
+            @foreach ($this->types as $key => $type)
+              <option value="{{ $type->slug }}">{{ $type->name }} </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="grid gap-2">
+          <p class="font-medium tracking-wide capitalize">Years</p>
+          <div class="flex items-center gap-2">
+          <select wire:model.live="min_year" name="min_year" id="min_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+            <option value="">Min</option>
+            @foreach ($years as $year)
+              <option value="{{ $year }}">{{ $year }}</option>
+            @endforeach
+          </select>
+          <select wire:model.live="max_year" name="max_year" id="max_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+            <option value="">Max</option>
+            @foreach ($years as $year)
+              <option value="{{ $year }}">{{ $year }}</option>
+            @endforeach
+          </select>
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="font-medium tracking-wide capitalize">Mileage</p>
+          <div class="flex items-center gap-2">
+            <input type="text" wire:model="min_mileage" class="rounded-md" placeholder="Minimum">
+            <input type="text" wire:model="max_mileage" class="rounded-md" placeholder="Maxium">
+          </div>
+        </div>
+        <div class="grid gap-2">
+          <p class="font-medium tracking-wide capitalize">Price</p>
+          <div class="flex items-center gap-2">
+            <input type="text" wire:model="min_price" class="rounded-md" placeholder="Minimum">
+            <input type="text" wire:model="max_price" class="rounded-md" placeholder="Maxium">
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
