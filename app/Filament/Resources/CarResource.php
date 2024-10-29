@@ -37,7 +37,7 @@ class CarResource extends Resource
         Tabs::make()
           ->columnSpanFull()
           ->schema([
-            Tab::make('Details')
+            Tab::make('Basic Info')
             ->columns(2)
               ->schema([
                 TextInput::make('name')->required(),
@@ -62,24 +62,43 @@ class CarResource extends Resource
               ]),
             Tab::make('Overview')
               ->schema([
+                TagsInput::make('features')
+                ->placeholder('New Feature')
+                ->columnSpanFull(),
                 RichEditor::make('overview')
               ]),
-            Tab::make('Specifications')
+            Tab::make('Engine')
             ->columns(2)
             ->schema([
               TextInput::make('engine_type'),
               TextInput::make('horse_power'),
               TextInput::make('top_speed'),
-              TextInput::make('transmission')
+              TextInput::make('fuel_type'),
+            ]),
+            Tab::make('Transmission')
+            ->columns(2)
+            ->schema([
+              TextInput::make('transmission_type')
               ->datalist([
                 'Manual', 'Automatic', 'Semi-Automatic'
               ]),
-              TextInput::make('fuel_type'),
+              TextInput::make('number_of_gears')
+              ->numeric(),
+            ]),
+            Tab::make('Capacity')
+            ->columns(2)
+            ->schema([
+              TextInput::make('fuel_tank_capacity'),
               TextInput::make('number_of_seats')
               ->numeric(),
-              TagsInput::make('features')
-              ->placeholder('New Feature')
-              ->columnSpanFull()
+            ]),
+            Tab::make('Measurements')
+            ->columns(2)
+            ->schema([
+              TextInput::make('width'),
+              TextInput::make('height'),
+              TextInput::make('curb_weight'),
+              TextInput::make('payload'),
             ])
             
           ]),

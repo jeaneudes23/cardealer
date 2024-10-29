@@ -35,6 +35,22 @@
     <div class="my-section">
         <div class="container space-y-16">
             <div class="space-y-4">
+                <h2 class="text-center text-4xl font-bold uppercase">Popular Sales</h2>
+                <hr class="border-secondary mx-auto border-2 max-w-10">
+            </div>
+            <div class="grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-8 gap-y-12 justify-center">
+                @foreach ($listings as $listing)
+                  <x-listing-card :listing="$listing" wire:key="{{$listing->id}}"/>
+                @endforeach
+            </div>
+            <div class="flex justify-center">
+              <a href={{route('sales.index')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
+            </div>
+        </div>
+    </div>
+    <div class="py-section bg-gray-100">
+        <div class="container space-y-16">
+            <div class="space-y-4">
                 <h2 class="text-center text-4xl font-bold uppercase">Popular Cars</h2>
                 <hr class="border-secondary mx-auto border-2 max-w-10">
             </div>

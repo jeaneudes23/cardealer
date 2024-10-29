@@ -82,7 +82,7 @@ class ListingResource extends Resource
           ->lineClamp(1)
           ->searchable(),
         Tables\Columns\TextColumn::make('car.name')
-          ->numeric()
+          ->searchable()
           ->sortable(),
         Tables\Columns\TextColumn::make('condition'),
         Tables\Columns\TextColumn::make('mileage')

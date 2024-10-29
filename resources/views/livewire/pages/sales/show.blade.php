@@ -90,9 +90,13 @@ $setTab = function ($t) {
             </div>
           </div>
           <div>
-            <a wire:navigate href="{{route('cars.show', $listing->car->slug)}}" class="p-2 text-gray-500 font-semibold capitalize underline hover:text-secondary inline-flex items-center gap-2">
-              More Details
+            <a wire:navigate href="{{route('cars.show', $listing->car->slug)}}" class="p-2 font-semibold capitalize hover:underline inline-flex items-center gap-2">
               <x-lucide-external-link class="size-5"/>
+              More Details
+            </a>
+            <a href="#appointment" class="p-2 font-semibold capitalize text-secondary hover:underline inline-flex items-center gap-2">
+              <x-lucide-calendar class="size-5"/>
+              Request an appointment
             </a>
           </div>
         </div>
@@ -109,7 +113,7 @@ $setTab = function ($t) {
       <div id="recommendations" class="scroll-mt-20 space-y-8">
         <h2 class="text-3xl font-bold capitalize">Recommended for you</h2>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-          @foreach ($listing->related() as $relatedListing)
+        @foreach (Listing::inRandomOrder()->take(3)->get() as $relatedListing)
             <x-listing-card :listing="$relatedListing" />
           @endforeach
         </div>

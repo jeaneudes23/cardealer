@@ -28,8 +28,8 @@ layout('layouts.app');
 
 ?>
 
-<div class="my-12 container grid gap-6 lg:grid-cols-[300px,1fr] items-start">
-  <div class="border rounded-lg">
+<div class="my-12 container grid gap-6 lg:grid-cols-[auto,1fr] items-start">
+  <div class="w-[310px] hidden lg:block border rounded-lg">
     <div class="flex justify-between items-center p-4 border-b">
       <h3 class="text-xl font-semibold capitalize">Filters</h3>
       <a href="{{route('cars.index')}}" wire:navigate class="inline-flex items-center gap-1 hover:underline">

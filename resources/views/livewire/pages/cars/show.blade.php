@@ -16,21 +16,21 @@ $setTab = fn($t) => ($this->tab = $t);
 ?>
 
 <div class="container my-8 space-y-16">
-  <div class="grid grid-cols-2 gap-12">
+  <div class="grid lg:grid-cols-2 gap-12">
     <div class="grid content-center gap-4">
       <h2 class="text-4xl font-semibold">{{ $car->name }}</h2>
       <p class="text-lg">{{ $car->summary }}</p>
       <div class="flex gap-4">
-        <a href="#listed" class="justify-self-start bg-secondary px-8 py-3 font-medium text-secondary-foreground">OnSale</a>
-        <a href="{{route('compare', ['carA' => $car->slug])}}" class="justify-self-start border-2 border-secondary px-8 py-3 font-medium">Compare</a>
+        <a href="#listed" class="justify-self-start bg-secondary px-6 py-2 font-medium text-secondary-foreground">On Sale</a>
+        <a wire:navigate href="{{route('compare', ['carA' => $car->slug])}}" class="justify-self-start border-2 border-foreground px-6 py-2 font-medium">Compare</a>
       </div>
     </div>
     <div>
       <img src="{{ asset('storage/' . $car->image) }}" class="rounded-lg" alt="">
     </div>
   </div>
-  <div class="grid grid-cols-[3fr,1fr] items-start gap-8">
-    <div class="space-y-16 border-r pr-8">
+  <div class="grid lg:grid-cols-[1fr,auto] items-start gap-8">
+    <div class="space-y-16">
       <x-car-specs :car="$car" />
       <div id="listed" class="scroll-mt-24 space-y-4">
         <h3 class="text-3xl font-bold capitalize">Listed For Sale</h3>
@@ -62,7 +62,7 @@ $setTab = fn($t) => ($this->tab = $t);
         </div>
       </div>
     </div>
-    <div class="sticky top-24 grid gap-2">
+    <div class="border-l pl-8 sticky top-24 gap-2 hidden lg:grid w-[310px]">
       <p class="text-lg font-semibold capitalize">{{ $car->name }}</p>
       <div class="grid gap-1">
         <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"

@@ -81,8 +81,8 @@ new class extends Component implements HasForms {
   <div class="bg-gray-100 divide-y divide-muted rounded-lg">
     <form wire:submit='create' class="p-6">
       {{ $this->form }}
-      <div class="mt-8 grid">
-        <button type="submit" class="bg-secondary py-2 text-lg font-medium uppercase tracking-wide text-secondary-foreground inline-flex items-center justify-center gap-2">
+      <div class="mt-8">
+        <button type="submit" class="bg-secondary rounded-lg px-8 py-2 font-medium capitalize tracking-wide text-secondary-foreground inline-flex items-center justify-center gap-2">
           <span wire:loading><x-lucide-loader-circle class="size-5 animate-spin"/></span>
           Submit
         </button>

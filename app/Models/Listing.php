@@ -45,7 +45,7 @@ class Listing extends Model
 
     if (filled($type)) {
       $query->whereHas('car', function ($car) use ($type) {
-        $car->where('types', function ($inner) use ($type) {
+        $car->whereHas('types', function ($inner) use ($type) {
           $inner->where('slug', 'like', '%' . $type . '%');
         });
       });
@@ -103,13 +103,6 @@ class Listing extends Model
       }
       
     }
-
-    return $query;
-  }
-
-  public static function customSort(string $method = null){
-    $query = self::query();
-    $query->orderBy('price','desc');
 
     return $query;
   }

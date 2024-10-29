@@ -32,6 +32,12 @@
         <p>{{ $car->engine_type }}</p>
       </div>
 
+      <!-- Fuel Type -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Fuel Type</h3>
+        <p>{{ $car->fuel_type }}</p>
+      </div>
+
       <!-- Horsepower -->
       <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
         <h3 class="font-semibold capitalize">Horsepower</h3>
@@ -46,20 +52,52 @@
 
       <!-- Transmission -->
       <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
-        <h3 class="font-semibold capitalize">Transmission</h3>
-        <p>{{ $car->transmission }}</p>
+        <h3 class="font-semibold capitalize">Transmission Type</h3>
+        <p>{{ $car->transmission_type }}</p>
       </div>
 
-      <!-- Fuel Type -->
+      <!-- Gears -->
       <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
-        <h3 class="font-semibold capitalize">Fuel Type</h3>
-        <p>{{ $car->fuel_type }}</p>
+        <h3 class="font-semibold capitalize">Number of Gears</h3>
+        <p>{{ $car->number_of_gears }}</p>
       </div>
+
+
+      <!-- Fuel Capacity -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Fuel Tank Capacity</h3>
+        <p>{{ $car->fuel_tank_capacity }}</p>
+      </div>
+
 
       <!-- Seating Capacity -->
       <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
         <h3 class="font-semibold capitalize">Seating Capacity</h3>
         <p>{{ $car->number_of_seats }}</p>
+      </div>
+
+      <!-- Width -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Width</h3>
+        <p>{{ $car->width }}</p>
+      </div>
+
+      <!-- Height -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Height</h3>
+        <p>{{ $car->height }}</p>
+      </div>
+
+      <!-- Curb Weight -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Curb Weight</h3>
+        <p>{{ $car->curb_weight }}</p>
+      </div>
+
+      <!-- Payload -->
+      <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-lg">
+        <h3 class="font-semibold capitalize">Payload</h3>
+        <p>{{ $car->payload }}</p>
       </div>
 
     </div>
