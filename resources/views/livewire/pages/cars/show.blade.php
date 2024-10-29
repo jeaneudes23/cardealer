@@ -20,8 +20,10 @@ $setTab = fn($t) => ($this->tab = $t);
     <div class="grid content-center gap-4">
       <h2 class="text-4xl font-semibold">{{ $car->name }}</h2>
       <p class="text-lg">{{ $car->summary }}</p>
-      <a href="#listed" class="justify-self-start bg-secondary px-8 py-3 font-medium text-secondary-foreground">On
-        Sale</a>
+      <div class="flex gap-4">
+        <a href="#listed" class="justify-self-start bg-secondary px-8 py-3 font-medium text-secondary-foreground">OnSale</a>
+        <a href="{{route('compare', ['carA' => $car->slug])}}" class="justify-self-start border-2 border-secondary px-8 py-3 font-medium">Compare</a>
+      </div>
     </div>
     <div>
       <img src="{{ asset('storage/' . $car->image) }}" class="rounded-lg" alt="">
@@ -30,12 +32,6 @@ $setTab = fn($t) => ($this->tab = $t);
   <div class="grid grid-cols-[3fr,1fr] items-start gap-8">
     <div class="space-y-16 border-r pr-8">
       <x-car-specs :car="$car" />
-      <div id="overview" class="scroll-mt-24 space-y-4">
-        <h2 class="text-3xl font-bold capitalize">overview</h2>
-        <div class="prose max-w-none">
-          {!! $car->overview !!}
-        </div>
-      </div>
       <div id="listed" class="scroll-mt-24 space-y-4">
         <h3 class="text-3xl font-bold capitalize">Listed For Sale</h3>
         <div>
@@ -48,6 +44,12 @@ $setTab = fn($t) => ($this->tab = $t);
               @endforeach
             </div>
           @endif
+        </div>
+      </div>
+      <div id="overview" class="scroll-mt-24 space-y-4">
+        <h2 class="text-3xl font-bold capitalize">overview</h2>
+        <div class="prose max-w-none">
+          {!! $car->overview !!}
         </div>
       </div>
       <livewire:pages.cars.reviews-tab :car="$car" />
@@ -65,10 +67,10 @@ $setTab = fn($t) => ($this->tab = $t);
       <div class="grid gap-1">
         <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
            href="#specs"><x-lucide-chevron-right class="size-5" />Specifications</a>
+           <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+           href="#listed"><x-lucide-chevron-right class="size-5" />For Sale</a>
         <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
            href="#overview"><x-lucide-chevron-right class="size-5" />Overview</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
-           href="#listed"><x-lucide-chevron-right class="size-5" />For Sale</a>
         <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
            href="#reviews"><x-lucide-chevron-right class="size-5" />Reviews</a>
         <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"

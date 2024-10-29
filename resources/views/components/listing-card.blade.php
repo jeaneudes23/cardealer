@@ -14,7 +14,7 @@
       <h3 class="font-medium max-w-lg line-clamp-2">{{ $listing->title }} </h3>
     </div>
     <div class="p-2 flex justify-between flex-wrap gap-2 items-center border-t">
-      <p class="text-lg font-medium"><span>{{ number_format($listing->price) }} </span><span class="uppercase">{{ $listing->currency }} </span></p>
+      <p class="text-lg font-medium"><span>{{ number_format($listing->price,0,',','.') }} </span><span class="uppercase">{{ $listing->currency }} </span></p>
       <span class="text-sm font-medium capitalize text-muted">{{$listing->mileage}} KM</span>
     </div>
   </div>

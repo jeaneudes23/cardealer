@@ -74,7 +74,7 @@ $setTab = function ($t) {
           <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
             <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-xl">
               <div class="font-semibold flex justify-between gap-2"><span>Price</span> <span class="text-red-600 text-sm font-medium">Negotiable</span></div>
-              <p class="text-gray-500">{{$listing->price}} <span class="uppercase">{{$listing->currency}}</span></p>  
+              <p class="text-gray-500">{{ number_format($listing->price,0,',','.') }} <span class="uppercase">{{$listing->currency}}</span></p>  
             </div>
             <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
               <div class="font-semibold">Condition</div>
@@ -82,7 +82,7 @@ $setTab = function ($t) {
             </div>
             <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
               <div class="font-semibold">Vehicle Id</div>
-              <p class="text-gray-500">{{$listing->vin}}</p>
+              <p class="text-gray-500 line-clamp-1">{{$listing->vin}}</p>
             </div>
             <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
               <div class="font-semibold">Mileage</div>
