@@ -23,6 +23,10 @@ class Car extends Model
   protected $guarded = [];
   use HasFactory;
 
+  protected $casts = [
+    'features' => 'array'
+  ];
+
   protected static function booted()
   {
     static::creating(function (Car $car) {

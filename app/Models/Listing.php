@@ -22,7 +22,7 @@ class Listing extends Model
     return $this->belongsTo(Car::class);
   }
 
-  public static function search(?string $q = null, string $brand = null, string $model = null, string $type = null, string $condition = null, string $min_year = null, string $max_year = null, string $min_mileage = null, string $max_mileage = null, string $min_price = null, string $max_price = null): Builder
+  public static function search(?string $q = null, string $brand = null, string $model = null, string $type = null, string $condition = null, string $min_year = null, string $max_year = null, string $min_mileage = null, string $max_mileage = null, string $min_price = null, string $max_price = null,string $sort = null): Builder
   {
     $query = self::query();
 
@@ -83,6 +83,38 @@ class Listing extends Model
       $query->where('price', '<=', $max_price);
     }
 
+    if (filled($sort)){
+      switch ($sort) {
+        case 'price-asc':
+          $query->orderBy('price','asc');
+          break;
+        case 'price-desc':
+          $query->orderBy('price','desc');
+          break;
+        case 'mileage-desc':
+          $query->orderBy('mileage','desc');
+          break;
+        case 'mileage-asc':
+          $query->orderBy('mileage','asc');
+          break;
+        default:
+          $query->orderBy('created_at','desc');
+          break;
+      }
+      
+    }
+
     return $query;
+  }
+
+  public static function customSort(string $method = null){
+    $query = self::query();
+    $query->orderBy('price','desc');
+
+    return $query;
+  }
+
+  public function related() {
+    return Listing::take(4)->get();
   }
 }

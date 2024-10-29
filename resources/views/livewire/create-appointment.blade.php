@@ -76,12 +76,9 @@ new class extends Component implements HasForms {
   }
 }; ?>
 
-<div>
-  <div class="bg-muted-background divide-y divide-muted border border-muted">
-    <div class="p-4 text-xl font-semibold uppercase flex justify-center items-center gap-2">
-      <x-heroicon-o-calendar-days class="size-6"/>
-      Request Appointment
-    </div>
+<div class="space-y-8">
+  <h3 class="text-3xl font-bold capitalize">Request Appointment</h3>
+  <div class="bg-gray-100 divide-y divide-muted rounded-lg">
     <form wire:submit='create' class="p-6">
       {{ $this->form }}
       <div class="mt-8 grid">

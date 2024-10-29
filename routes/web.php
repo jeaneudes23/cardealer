@@ -13,9 +13,9 @@ Route::get('/', function(){
   $cars = Car::with(['brand:id,name,slug','types:id,name'])->take(4)->get();
   // return response()->json(['cars' => $cars]);
   return view('welcome', compact('cars','features'));
-})->name('welcome');
+})->name('home');
 
-Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+// Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 

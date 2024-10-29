@@ -15,7 +15,6 @@ layout('layouts.app');
 
 usesPagination();
 state(['per_page' => 12]);
-state(['for_sale'])->url();
 state(['years' => fn() => Car::distinct()->orderBy('year', 'asc')->pluck('year')]);
 state(['brand'])->url();
 state(['condition'])->url();
@@ -27,9 +26,8 @@ state(['min_price'])->url();
 state(['min_mileage'])->url();
 state(['max_price'])->url();
 state(['max_mileage'])->url();
-state(['page'])->url();
+state(['sort'])->url();
 
-$toggleForSale = fn() => ($this->for_sale = !$this->for_sale);
 
 $brands = computed(fn() => Brand::get(['id', 'name', 'slug']))->persist();
 $types = computed(fn() => Type::get(['id', 'name', 'slug']))->persist();
@@ -37,8 +35,9 @@ $models = computed(fn() => CarModel::whereHas('brand' , function($query){
   $query->where('slug',$this->brand);
 })->get(['id', 'name', 'slug', 'brand_id']));
 
-with(fn() => ['listings' => Listing::search(null,$this->brand,$this->model,$this->type,$this->condition,$this->min_year,$this->max_year,$this->min_mileage,$this->max_mileage,$this->min_price,$this->max_price)->paginate($this->per_page)]);
+with(fn() => ['listings' => Listing::search(null,$this->brand,$this->model,$this->type,$this->condition,$this->min_year,$this->max_year,$this->min_mileage,$this->max_mileage,$this->min_price,$this->max_price,$this->sort)->paginate($this->per_page)]);
 
+$sortBy = fn (string $method) => $this->sort = $method
 
 ?>
 
@@ -122,27 +121,28 @@ with(fn() => ['listings' => Listing::search(null,$this->brand,$this->model,$this
       </div>
     </div>
     <div>
+      <div class="flex justify-end relative z-10 mb-8">
+        <div x-data="{open: false}">
+          <button @click="open = true" class="inline-flex items-start font-medium px-4 py-2 border rounded-lg text-sm">
+            Sort
+            <x-lucide-chevron-down class="size-5"/>
+          </button>
+          <div x-show="open" x-transition @click.outside="open = false"  class="relative">
+            <div class="absolute right-0 w-48 grid bg-background p-2 rounded-lg shadow">
+              <button wire:click="sortBy('price-asc')" class="inline-flex justify-start p-2 rounded-md hover:bg-gray-200 transition-colors text-sm">Price: Low To High</button>
+              <button wire:click="sortBy('price-desc')" class="inline-flex justify-start p-2 rounded-md hover:bg-gray-200 transition-colors text-sm">Price: High To Low</button>
+              <button wire:click="sortBy('mileage-asc')" class="inline-flex justify-start p-2 rounded-md hover:bg-gray-200 transition-colors text-sm">Mileage: Low To High</button>
+              <button wire:click="sortBy('price-desc')" class="inline-flex justify-start p-2 rounded-md hover:bg-gray-200 transition-colors text-sm">Mileage: High To Low</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
         @for ($i = 0; $i < $per_page; $i++)
           <div wire:loading.class.remove="hidden" class="hidden aspect-square animate-pulse rounded-lg bg-gray-200"></div>
         @endfor
       </div>
       <div wire:loading.remove class="grid gap-6">
-        <div class="flex justify-end">
-          <div>
-            <button>
-              Sort
-            </button>
-            <div class="relative">
-              <div class="absolute right-0 whitespace-pre z-10 bg-background p-4 rounded-lg shadow">
-                <button>Price: Low To High</button>
-                <button>Price: High To Low</button>
-                <button>Mileage: Low To High</button>
-                <button>Mileage: High To Low</button>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 items-start">
           @forelse ($listings as $listing)
             <x-listing-card :listing="$listing" wire:key="{{ $listing->id }}" />

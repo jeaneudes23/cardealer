@@ -126,21 +126,19 @@ new class extends Component {
       <div class="hidden items-center gap-6 text-background group-data-[top=false]/nav:text-foreground lg:flex">
         <div class="group hidden lg:block">
           <div class="inline-flex cursor-pointer items-center gap-4">
-            <a href="{{ route('cars.index') }}" wire:navigate class="p-2 font-medium capitalize">Find Cars</a>
+            <a href="{{ route('cars.index') }}" wire:navigate class="p-2 font-medium capitalize">Cars</a>
             <x-heroicon-o-chevron-down class="size-5" />
           </div>
           <div class="relative">
-            <div
-                 class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 text-foreground opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+            <div class="pointer-events-none absolute left-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 text-foreground opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
               <div class="grid gap-1">
-                <a href="{{ route('sales.index') }}" wire:navigate
-                   class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">For
-                  Sale</a>
+                <a href="{{ route('sales.index') }}" wire:navigate class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">For Sale</a>
+                <a href="{{ route('cars.index') }}" wire:navigate class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">Research</a>
+                <a href="{{ route('compare') }}" wire:navigate class="rounded-md p-2 text-sm capitalize tracking-wide transition-colors hover:bg-muted-background">Compare</a>
               </div>
             </div>
           </div>
         </div>
-        <a href="{{ route('compare') }}" wire:navigate class="px-2 font-medium capitalize">Compare Cars</a>
         @guest
         <a href="{{ route('login') }}" wire:navigate class="px-2 font-medium capitalize">Login</a>
         <a href="{{ route('register') }}" wire:navigate class="bg-secondary px-6 py-2 font-medium capitalize tracking-wide text-secondary-foreground">Register</a>
@@ -153,7 +151,7 @@ new class extends Component {
             <x-heroicon-o-chevron-down class="size-5" />
           </div>
           <div class="relative">
-            <div class="pointer-events-none absolute right-0 w-40 -translate-y-2 rounded-lg border bg-background p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+            <div class="pointer-events-none absolute right-0 w-40 -translate-y-2 rounded-lg border bg-background text-foreground p-2 opacity-0 shadow transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
               <div class="grid gap-1">
                 <a href="{{ route('profile') }}" wire:navigate class="p-2 rounded-md text-sm font-medium capitalize hover:bg-muted-background transition-colors">Profile</a>
                 <button wire:click="logout" class="p-2 rounded-md text-sm flex justify-start font-medium capitalize hover:bg-muted-background transition-colors">Logout</button>

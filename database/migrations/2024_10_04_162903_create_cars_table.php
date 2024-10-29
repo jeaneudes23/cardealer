@@ -32,8 +32,8 @@ return new class extends Migration
       $table->string('top_speed')->nullable();
       $table->string('transmission')->nullable();
       $table->string('fuel_type')->nullable();
-      $table->string('seats')->nullable();
-      $table->text('features')->nullable();
+      $table->integer('number_of_seats')->nullable();
+      $table->json('features')->nullable();
 
       $table->timestamps();
     });

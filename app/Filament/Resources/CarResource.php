@@ -12,6 +12,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -62,7 +63,25 @@ class CarResource extends Resource
             Tab::make('Overview')
               ->schema([
                 RichEditor::make('overview')
-              ])
+              ]),
+            Tab::make('Specifications')
+            ->columns(2)
+            ->schema([
+              TextInput::make('engine_type'),
+              TextInput::make('horse_power'),
+              TextInput::make('top_speed'),
+              TextInput::make('transmission')
+              ->datalist([
+                'Manual', 'Automatic', 'Semi-Automatic'
+              ]),
+              TextInput::make('fuel_type'),
+              TextInput::make('number_of_seats')
+              ->numeric(),
+              TagsInput::make('features')
+              ->placeholder('New Feature')
+              ->columnSpanFull()
+            ])
+            
           ]),
       ]);
   }

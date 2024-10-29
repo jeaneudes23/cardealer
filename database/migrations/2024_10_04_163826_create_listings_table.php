@@ -13,12 +13,11 @@ return new class extends Migration
   {
     Schema::create('listings', function (Blueprint $table) {
       $table->id();
-      $table->string('title')->unique();
-      
       $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
-
+      $table->string('title')->unique();
+      $table->text('overview');
       $table->enum('condition', ['new', 'used']);
-      $table->integer('mileage')->nullable();
+      $table->string('mileage')->nullable();
       $table->string('vin')->unique();
       $table->integer('price');
       $table->enum('currency', ['rwf','usd']);
