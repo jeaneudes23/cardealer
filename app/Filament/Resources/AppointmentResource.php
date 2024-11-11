@@ -72,7 +72,14 @@ class AppointmentResource extends Resource
           ->dateTime()
           ->sortable(),
         Tables\Columns\TextColumn::make('status')
-        ->badge(),
+          ->badge()
+          ->color(fn(string $state) => match ($state) {
+            'pending' => 'gray',
+            'cancelled' => 'danger',
+            'approved' => 'success',
+            'completed' => 'info',
+            default => 'gray'
+          }),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()

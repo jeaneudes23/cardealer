@@ -7,6 +7,8 @@ layout('layouts.app')
 
 ?>
 
-<div>
-    appointments
+<div class="container">
+  <div class="mt-8">
+    @livewire('customer-appointments-table')
+  </div>
 </div>
