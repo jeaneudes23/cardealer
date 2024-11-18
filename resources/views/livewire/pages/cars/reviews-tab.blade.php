@@ -25,7 +25,10 @@ $createReview = function () {
     $this->rating = 1;
     $this->comment = '';
 
-    flash()->overlay('Thank you for your review','Review Added')->success()->livewire($this);
+    Notification::make()
+    ->title('Review Added')
+    ->success()
+    ->send();
 };
 
 $setRating = function ($i) {

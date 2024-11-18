@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Models\Content;
 use App\Models\Listing;
 use App\Models\Type;
 use App\Models\User;
@@ -24,12 +25,24 @@ class DatabaseSeeder extends Seeder
   {
     // User::factory(10)->create();
 
+    Content::create([
+      'hero_section_image' => 'hero.jpg',
+      'hero_section_badge' => 'Modern car design',
+      'hero_section_title' => 'Find your modern car',
+      'hero_section_description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, accusantium? Lorem
+      ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam magni beatae animi distinctio
+      nihil.',
+    ]);
+
     User::create([
       'name' => 'Admin',
       'email' => 'admin@test.com',
       'password' => Hash::make('password'),
       'role' => 'admin'
     ]);
+
+
+    User::factory()->count(50)->create();
 
     $types = ['Sedans', 'SUVs', 'Hatchbacks', 'Coupes', 'Convertibles', 'Pickup Trucks', 'Minivans', 'Electric Vehicles', 'Hybrid Cars', 'Luxury Cars'];
 

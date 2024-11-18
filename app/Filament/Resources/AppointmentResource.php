@@ -35,8 +35,8 @@ class AppointmentResource extends Resource
             Forms\Components\Select::make('car_id')
               ->relationship('car', 'name')
               ->searchable(),
-            Forms\Components\Select::make('staff_id')
-              ->relationship('staff', 'name')
+            Forms\Components\Select::make('sales_person_id')
+              ->relationship('salesPerson', 'name')
               ->searchable(),
             Forms\Components\DateTimePicker::make('date')
               ->required(),
@@ -46,7 +46,7 @@ class AppointmentResource extends Resource
               ->options([
                 'pending' => 'Pending',
                 'cancelled' => 'Cancelled',
-                'approved' => 'Approved',
+                'scheduled' => 'Scheduled',
                 'completed' => 'Completed'
               ])
               ->native(0)
@@ -65,7 +65,7 @@ class AppointmentResource extends Resource
         Tables\Columns\TextColumn::make('car.name')
           ->numeric()
           ->sortable(),
-        Tables\Columns\TextColumn::make('staff.name')
+        Tables\Columns\TextColumn::make('salesPerson.name')
           ->numeric()
           ->sortable(),
         Tables\Columns\TextColumn::make('date')
@@ -75,8 +75,8 @@ class AppointmentResource extends Resource
           ->badge()
           ->color(fn(string $state) => match ($state) {
             'pending' => 'gray',
+            'scheduled' => 'success',
             'cancelled' => 'danger',
-            'approved' => 'success',
             'completed' => 'info',
             default => 'gray'
           }),
@@ -89,6 +89,7 @@ class AppointmentResource extends Resource
           ->sortable()
           ->toggleable(isToggledHiddenByDefault: true),
       ])
+      ->defaultSort('created_at','desc')
       ->filters([
         //
       ])

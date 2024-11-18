@@ -19,7 +19,7 @@ class Appointment extends Model
     return $this->belongsTo(Customer::class);
   }
 
-  public function staff(): BelongsTo {
-    return $this->belongsTo(Admin::class);
+  public function salesPerson(): BelongsTo {
+    return $this->belongsTo(SalesPerson::class);
   }
 }

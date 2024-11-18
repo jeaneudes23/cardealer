@@ -20,7 +20,9 @@ class ListingResource extends Resource
 {
   protected static ?string $model = Listing::class;
 
-  protected static ?string $navigationIcon = 'ionicon-car-outline';
+  protected static ?string $navigationIcon = 'ionicon-bookmark-outline';
+  protected static ?string $navigationGroup = 'Cars';
+
 
   public static function form(Form $form): Form
   {
@@ -46,10 +48,6 @@ class ListingResource extends Resource
             Forms\Components\TextInput::make('vin'),
             Forms\Components\TextInput::make('mileage')
               ->numeric(),
-            Forms\Components\TextInput::make('price')
-              ->required()
-              ->numeric()
-              ->prefix(fn(Get $get) => Str::upper($get('currency'))),
             Forms\Components\Select::make('currency')
               ->options([
                 'rwf' => 'RWF',
@@ -57,6 +55,10 @@ class ListingResource extends Resource
               ])
               ->native(0)
               ->live(),
+            Forms\Components\TextInput::make('price')
+              ->required()
+              ->numeric()
+              ->prefix(fn(Get $get) => Str::upper($get('currency'))),
             Forms\Components\Toggle::make('is_negotiable'),
             Forms\Components\FileUpload::make('cover_image')
               ->image()
@@ -93,10 +95,10 @@ class ListingResource extends Resource
           ->toggleable(isToggledHiddenByDefault: true)
           ->searchable(),
         Tables\Columns\TextColumn::make('price')
-          ->suffix(fn (Listing $record) => Str::upper(' '.$record->currency))
+          ->suffix(fn(Listing $record) => Str::upper(' ' . $record->currency))
           ->sortable(),
         Tables\Columns\ImageColumn::make('cover_image')
-        ->toggleable(isToggledHiddenByDefault: true),
+          ->toggleable(isToggledHiddenByDefault: true),
         Tables\Columns\ToggleColumn::make('is_negotiable')
           ->toggleable(isToggledHiddenByDefault: true)
           ->sortable(),

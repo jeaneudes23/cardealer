@@ -20,7 +20,12 @@ class CustomerResource extends Resource
 {
   protected static ?string $model = Customer::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-users';
+  protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+  public static function getNavigationBadge(): ?string
+  {
+    return static::getModel()::count();
+  }
 
   public static function form(Form $form): Form
   {
@@ -40,14 +45,6 @@ class CustomerResource extends Resource
               ->required(fn (string $context): bool => $context == 'create')
               ->password()
               ->maxLength(255),
-            Select::make('role')
-              ->options([
-                'admin' => 'Admin',
-                'customer' => 'Customer'
-              ])
-              ->hiddenOn('create')
-              ->native(0)
-              ->required(),
           ])
       ]);
   }
@@ -64,7 +61,6 @@ class CustomerResource extends Resource
           ->toggleable(isToggledHiddenByDefault: true)
           ->dateTime()
           ->sortable(),
-        Tables\Columns\TextColumn::make('role'),
         Tables\Columns\TextColumn::make('created_at')
           ->dateTime()
           ->sortable()

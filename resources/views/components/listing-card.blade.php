@@ -15,7 +15,7 @@
     </div>
     <div class="p-2 flex justify-between flex-wrap gap-2 items-center border-t">
       <p class="text-lg font-medium"><span>{{ number_format($listing->price,0,',','.') }} </span><span class="uppercase">{{ $listing->currency }} </span></p>
-      <span class="text-sm font-medium capitalize text-muted">{{$listing->mileage}}</span>
+      <span class="text-sm font-medium capitalize text-muted">{{$listing->mileage > 0 ? $listing->mileage : ''}}</span>
     </div>
   </div>
 </a>

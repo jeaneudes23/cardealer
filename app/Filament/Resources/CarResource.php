@@ -30,6 +30,7 @@ class CarResource extends Resource
   protected static ?string $navigationIcon = 'ionicon-car-sport';
   protected static ?string $navigationGroup = 'Cars';
 
+
   public static function form(Form $form): Form
   {
     return $form

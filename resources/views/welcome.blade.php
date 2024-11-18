@@ -3,17 +3,15 @@
     <div class="grid -mt-20">
         <div class="stack grid grid-cols-2">
             <div class="col-start-2 h-full relative rounded-custom overflow-hidden">
-              <img class="absolute h-full w-full object-cover object-right-bottom" src="https://www.mbofcaldwell.com/wp-content/themes/DealerInspireDealerTheme/images/seo-bg.jpg"alt="">
+              <img class="absolute h-full w-full object-cover object-center" src="{{ asset('storage/'.$content->hero_section_image) }}"alt="">
               <div class="absolute inset-0 bg-black/20 bg-gradient-to-br from-black"></div>
             </div>
         </div>
         <div class="stack grid content-center container py-40 gap-8 z-10 bg-white lg:bg-transparent">
             <div class="grid gap-6 max-w-2xl">
-                <span class="text-secondary font-bold">Modern car design</span>
-                <h1 class="text-4xl xl:text-7xl font-bold uppercase">Find your modern car</h1>
-                <p class="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, accusantium? Lorem
-                    ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam magni beatae animi distinctio
-                    nihil.</p>
+                <span class="text-secondary font-bold">{{ $content->hero_section_badge }}</span>
+                <h1 class="text-4xl xl:text-7xl font-bold uppercase">{{ $content->hero_section_title }}</h1>
+                <p class="text-lg">{{ $content->hero_section_description }}</p>
             </div>
             <form method="GET" action="sales" class="flex p-4 shadow-md border w-fit">
                 <div class="">

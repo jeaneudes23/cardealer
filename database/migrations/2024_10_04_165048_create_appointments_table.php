@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('car_id')->nullable()->constrained('cars')->onDelete('cascade');
-            $table->foreignId('staff_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('sales_person_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamp('date');
             $table->text('message')->nullable();
-            $table->enum('status',['pending','cancelled', 'approved','completed'])->default('pending');
+            $table->enum('status',['pending','scheduled', 'cancelled','completed'])->default('pending');
             $table->timestamps();
         });
     }

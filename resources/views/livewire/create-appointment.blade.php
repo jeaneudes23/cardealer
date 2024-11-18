@@ -1,5 +1,7 @@
 <?php
 
+use App\Filament\Resources\AppointmentResource;
+use App\Jobs\SendResetLink;
 use App\Mail\AppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Car;
@@ -12,6 +14,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Livewire\Notifications;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
+use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -36,7 +42,7 @@ new class extends Component implements HasForms {
         TextInput::make('name')->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
         TextInput::make('email')
         ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
-        DateTimePicker::make('date')->required()->default(now())->minDate(Carbon::today()),
+        DateTimePicker::make('date')->required()->default(now()->addDays(2))->minDate(now()->addDays(2)),
         Textarea::make('message'),
 
         // ->native(0)
@@ -58,20 +64,33 @@ new class extends Component implements HasForms {
           'password' => fake()->password(),
         ]);
 
-        !Auth::check() && Password::sendResetLink(['email' => $customer->email]);
+        !Auth::check() && dispatch(new SendResetLink($customer->email));
       }
     }
 
-    Appointment::create([
+    $appointment = Appointment::create([
       'customer_id' => $customer->id,
       'date' => $this->data['date'],
       'message' => $this->data['message'],
       'car_id' => $this->car->id
     ]);
+    
+    Notification::make()
+    ->title('Appointment Requested')
+    ->body($appointment->message)
+    ->actions([
+      Action::make('view')
+      ->url(fn () => AppointmentResource::getUrl('view',['record' => $appointment->id]))
+    ])
+    ->sendToDatabase(User::where('role','admin')->get());
 
     $this->form->fill([]);
 
-    flash()->overlay($message, 'Appointment Requested')->success()->livewire($this);
+    Notification::make()
+    ->title('Appointment Requested')
+    ->body($message)
+    ->success()
+    ->send();
 
   }
 }; ?>

@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Models\Content;
 use App\Models\Feature;
 use App\Models\Listing;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,10 +12,11 @@ use Livewire\Volt\Volt;
 
 Route::get('/', function(){
   $features = Feature::get();
+  $content = Content::first();
   $listings = Listing::take(8)->get();
   $cars = Car::with(['brand:id,name,slug','types:id,name'])->take(4)->get();
   // return response()->json(['cars' => $cars]);
-  return view('welcome', compact('cars','features','listings'));
+  return view('welcome', compact('cars','features','listings','content'));
 })->name('home');
 
 // Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
