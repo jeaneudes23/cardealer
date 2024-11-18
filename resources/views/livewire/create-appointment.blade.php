@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -39,13 +40,15 @@ new class extends Component implements HasForms {
   {
     return $form
       ->schema([
-        TextInput::make('name')->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
-        TextInput::make('email')
-        ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
-        DateTimePicker::make('date')->required()->default(now()->addDays(2))->minDate(now()->addDays(2)),
-        Textarea::make('message'),
-
-        // ->native(0)
+        Group::make()
+        ->columns(2)
+        ->schema([
+          TextInput::make('name')->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
+          TextInput::make('email')
+          ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
+          DateTimePicker::make('date')->required()->default(now()->addDays(2))->minDate(now()->addDays(2)),
+          Textarea::make('message'),
+        ])
       ])
       ->statePath('data');
   }
