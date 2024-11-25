@@ -54,7 +54,7 @@ $sortBy = fn (string $method) => $this->sort = $method
       <div class="grid gap-2 text-sm p-4 ">
         <div class="grid gap-2">
           <label for="condition" class="font-medium tracking-wide capitalize">Condition</label>
-          <select wire:model.live="condition" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
+          <select wire:model.live="condition" class="w-full rounded-md focus:border-primary focus:ring-primary" name="brand" id="brand">
             <option value="">All</option>
             <option value="used">Used</option>
             <option value="new">New</option>
@@ -62,7 +62,7 @@ $sortBy = fn (string $method) => $this->sort = $method
         </div>
         <div class="grid gap-2">
           <label for="brand" class="font-medium tracking-wide capitalize">Brand</label>
-          <select wire:model.live="brand" class="w-full rounded-md focus:border-secondary focus:ring-secondary" name="brand" id="brand">
+          <select wire:model.live="brand" class="w-full rounded-md focus:border-primary focus:ring-primary" name="brand" id="brand">
             <option value="">All Brands</option>
             @foreach ($this->brands as $key => $b)
               <option value="{{ $b->slug }}">{{ $b->name }}</option>
@@ -90,13 +90,13 @@ $sortBy = fn (string $method) => $this->sort = $method
         <div class="grid gap-2">
           <p class="font-medium tracking-wide capitalize">Years</p>
           <div class="flex items-center gap-2">
-          <select wire:model.live="min_year" name="min_year" id="min_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+          <select wire:model.live="min_year" name="min_year" id="min_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-primary p-2">
             <option value="">Min</option>
             @foreach ($years as $year)
               <option value="{{ $year }}">{{ $year }}</option>
             @endforeach
           </select>
-          <select wire:model.live="max_year" name="max_year" id="max_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-secondary p-2">
+          <select wire:model.live="max_year" name="max_year" id="max_year" class=" ring-muted rounded-lg focus-within:ring-2 focus-within:ring-primary p-2">
             <option value="">Max</option>
             @foreach ($years as $year)
               <option value="{{ $year }}">{{ $year }}</option>

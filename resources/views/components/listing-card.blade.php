@@ -4,7 +4,7 @@
   <div class="relative w-full aspect-video self-start justify-start bg-green-600">
     <img src="{{ asset('storage/' . $listing->cover_image) }}" class="absolute w-full h-full object-cover" alt="{{ $listing->title }}">
     @if ($listing->is_negotiable)
-      <div class="absolute left-0 top-0 bg-secondary p-2 text-xs font-semibold text-secondary-foreground">Negotiable
+      <div class="absolute left-0 top-0 bg-primary p-2 text-xs font-semibold text-primary-foreground">Negotiable
       </div>
     @endif
   </div>

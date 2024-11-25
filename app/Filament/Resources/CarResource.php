@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -57,8 +58,12 @@ class CarResource extends Resource
                   ->relationship('types', 'name'),
                 Toggle::make('is_featured'),
                 Forms\Components\TextInput::make('year')
+                  ->numeric()
+                  ->maxValue(3000)
                   ->required(),
-                FileUpload::make('image'),
+                FileUpload::make('image')
+                ->required(),
+                Textarea::make('summary')
 
               ]),
             Tab::make('Overview')

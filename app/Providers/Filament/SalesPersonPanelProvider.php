@@ -29,7 +29,7 @@ class SalesPersonPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->path('manager')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Sky,
             ])
             ->discoverResources(in: app_path('Filament/SalesPerson/Resources'), for: 'App\\Filament\\SalesPerson\\Resources')
             ->discoverPages(in: app_path('Filament/SalesPerson/Pages'), for: 'App\\Filament\\SalesPerson\\Pages')
@@ -38,8 +38,6 @@ class SalesPersonPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/SalesPerson/Widgets'), for: 'App\\Filament\\SalesPerson\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

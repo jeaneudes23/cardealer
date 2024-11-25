@@ -21,7 +21,7 @@ $setTab = fn($t) => ($this->tab = $t);
       <h2 class="text-4xl font-semibold">{{ $car->name }}</h2>
       <p class="text-lg">{{ $car->summary }}</p>
       <div class="flex gap-4">
-        <a href="#listed" class="justify-self-start bg-secondary px-6 py-2 font-medium text-secondary-foreground">On Sale</a>
+        <a href="#listed" class="justify-self-start bg-primary px-6 py-2 font-medium text-primary-foreground">On Sale</a>
         <a wire:navigate href="{{route('compare', ['carA' => $car->slug])}}" class="justify-self-start border-2 border-foreground px-6 py-2 font-medium">Compare</a>
       </div>
     </div>
@@ -65,15 +65,15 @@ $setTab = fn($t) => ($this->tab = $t);
     <div class="border-l pl-8 sticky top-24 gap-2 hidden lg:grid w-[310px]">
       <p class="text-lg font-semibold capitalize">{{ $car->name }}</p>
       <div class="grid gap-1">
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary"
            href="#specs"><x-lucide-chevron-right class="size-5" />Specifications</a>
-           <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+           <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary"
            href="#listed"><x-lucide-chevron-right class="size-5" />For Sale</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary"
            href="#overview"><x-lucide-chevron-right class="size-5" />Overview</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary"
            href="#reviews"><x-lucide-chevron-right class="size-5" />Reviews</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary"
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary"
            href="#rec"><x-lucide-chevron-right class="size-5" />Recommended</a>
       </div>
     </div>

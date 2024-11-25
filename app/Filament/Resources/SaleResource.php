@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SaleResource\Pages;
 use App\Filament\Resources\SaleResource\RelationManagers;
+use App\Filament\SalesPerson\Resources\SaleResource as ResourcesSaleResource;
 use App\Models\Sale;
 use Filament\Forms;
 use Filament\Forms\Components\Section;

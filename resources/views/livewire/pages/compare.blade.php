@@ -52,7 +52,7 @@ $resetCars = function ($car) {
       <div class="shadow-xl rounded-md overflow-hidden">
         <div class="relative">
           <img src="{{ asset('storage/' . $car_left->image) }}" class="aspect-video object-cover" alt="{{ $car_left->name }}">
-          <button wire:click="resetCars('A')" class="absolute left-2 top-2 p-2 bg-red-600 rounded-full text-secondary-foreground">
+          <button wire:click="resetCars('A')" class="absolute left-2 top-2 p-2 bg-red-600 rounded-full text-primary-foreground">
             <span class="sr-only">Remove</span>
             <x-lucide-x class="size-5"/>
           </button>
@@ -64,7 +64,7 @@ $resetCars = function ($car) {
             @endforeach
           </div>
           <a href="{{route('cars.show', $car_left->slug)}}">
-            <h3 class="text-lg font-semibold uppercase hover:text-secondary transition-colors">{{ $car_left->name }}</h3>
+            <h3 class="text-lg font-semibold uppercase hover:text-primary transition-colors">{{ $car_left->name }}</h3>
           </a>
         </div>
       </div>
@@ -106,7 +106,7 @@ $resetCars = function ($car) {
       <div class="shadow-xl rounded-md overflow-hidden">
         <div class="relative">
           <img src="{{ asset('storage/' . $car_right->image) }}" class="aspect-video object-cover" alt="{{ $car_right->name }}">
-          <button wire:click="resetCars('B')" class="absolute left-2 top-2 p-2 bg-red-600 rounded-full text-secondary-foreground">
+          <button wire:click="resetCars('B')" class="absolute left-2 top-2 p-2 bg-red-600 rounded-full text-primary-foreground">
             <span class="sr-only">Remove</span>
             <x-lucide-x class="size-5"/>
           </button>
@@ -118,7 +118,7 @@ $resetCars = function ($car) {
             @endforeach
           </div>
           <a href="{{route('cars.show', $car_right->slug)}}">
-            <h3 class="text-lg font-semibold uppercase hover:text-secondary transition-colors">{{ $car_right->name }}</h3>
+            <h3 class="text-lg font-semibold uppercase hover:text-primary transition-colors">{{ $car_right->name }}</h3>
           </a>
         </div>
       </div>
@@ -155,7 +155,7 @@ $resetCars = function ($car) {
       </div>
       @endif
     </div>
-    <div wire:loading class="absolute inset-0 bg-white/60 grid animate-pulse place-content-center text-secondary">
+    <div wire:loading class="absolute inset-0 bg-white/60 grid animate-pulse place-content-center text-primary">
       <x-lucide-loader-circle class="size-20 animate-spin mx-auto" />
     </div>
   </div>

@@ -87,6 +87,13 @@ new class extends Component implements HasForms {
       ->url(fn () => AppointmentResource::getUrl('view',['record' => $appointment->id]))
     ])
     ->sendToDatabase(User::where('role','admin')->get());
+    Notification::make()
+    ->title('Appointment Requested')
+    ->actions([
+      Action::make('view')
+      ->url(route('appointments.index'))
+    ])
+    ->sendToDatabase(User::find($appointment->customer_id));
 
     $this->form->fill([]);
 
@@ -105,7 +112,7 @@ new class extends Component implements HasForms {
     <form wire:submit='create' class="p-6">
       {{ $this->form }}
       <div class="mt-8">
-        <button type="submit" class="bg-secondary rounded-lg px-8 py-2 font-medium capitalize tracking-wide text-secondary-foreground inline-flex items-center justify-center gap-2">
+        <button type="submit" class="bg-primary rounded-lg px-8 py-2 font-medium capitalize tracking-wide text-primary-foreground inline-flex items-center justify-center gap-2">
           <span wire:loading><x-lucide-loader-circle class="size-5 animate-spin"/></span>
           Submit
         </button>

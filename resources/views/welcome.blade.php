@@ -9,7 +9,7 @@
         </div>
         <div class="stack grid content-center container py-40 gap-8 z-10 bg-white lg:bg-transparent">
             <div class="grid gap-6 max-w-2xl">
-                <span class="text-secondary font-bold">{{ $content->hero_section_badge }}</span>
+                <span class="text-primary font-bold">{{ $content->hero_section_badge }}</span>
                 <h1 class="text-4xl xl:text-7xl font-bold uppercase">{{ $content->hero_section_title }}</h1>
                 <p class="text-lg">{{ $content->hero_section_description }}</p>
             </div>
@@ -26,7 +26,7 @@
                     <lab for="max_price">Maximun Price</lab>
                     <input name="max_price" class="border-0 focus:border-0 focus:ring-0 px-0" type="text" placeholder="10000000 RWF">
                 </div>
-                <button class="bg-secondary text-secondary-foreground font-medium tracking-wide capitalize px-10 text-lg py-3 cursor-pointer">Search</button>
+                <button class="bg-primary text-primary-foreground font-medium tracking-wide capitalize px-10 text-lg py-3 cursor-pointer">Search</button>
             </form>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="container space-y-16">
             <div class="space-y-4">
                 <h2 class="text-center text-4xl font-bold uppercase">Popular Sales</h2>
-                <hr class="border-secondary mx-auto border-2 max-w-10">
+                <hr class="border-primary mx-auto border-2 max-w-10">
             </div>
             <div class="grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-8 gap-y-12 justify-center">
                 @foreach ($listings as $listing)
@@ -42,7 +42,7 @@
                 @endforeach
             </div>
             <div class="flex justify-center">
-              <a href={{route('sales.index')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
+              <a href={{route('sales.index')}} wire:navigate class="bg-foreground text-primary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
         <div class="container space-y-16">
             <div class="space-y-4">
                 <h2 class="text-center text-4xl font-bold uppercase">Popular Cars</h2>
-                <hr class="border-secondary mx-auto border-2 max-w-10">
+                <hr class="border-primary mx-auto border-2 max-w-10">
             </div>
             <div class="grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-8 gap-y-12 justify-center">
                 @foreach ($cars as $car)
@@ -58,19 +58,19 @@
                 @endforeach
             </div>
             <div class="flex justify-center">
-              <a href={{route('cars.index')}} wire:navigate class="bg-foreground text-secondary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
+              <a href={{route('cars.index')}} wire:navigate class="bg-foreground text-primary-foreground font-medium tracking-wide py-3 px-6 uppercase">View More</a>
             </div>
         </div>
     </div>
     <div class="py-section bg-foreground text-background space-y-12">
         <div class="space-y-4">
             <h2 class="text-center text-4xl font-bold uppercase">Features </h2>
-            <hr class="border-secondary mx-auto border-2 max-w-10">
+            <hr class="border-primary mx-auto border-2 max-w-10">
         </div>
         <div class="container grid sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8">
             @foreach ($features as $key => $feature)
               <div class="grid content-start p-6 border cursor-pointer hover:bg-background/10 transition-colors">
-                  <span class="justify-self-start size-10 grid place-content-center bg-secondary font-bold rounded-full">{{ $key + 1 }}</span>
+                  <span class="justify-self-start size-10 grid place-content-center bg-primary font-bold rounded-full">{{ $key + 1 }}</span>
                   <h3 class="mt-6 mb-2 text-xl uppercase font-semibold">{{ $feature->title }}</h3>
                   <p class="text-background/80">{{ $feature->description }}</p>
               </div>

@@ -8,6 +8,7 @@ use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -45,6 +46,8 @@ class CustomerResource extends Resource
               ->required(fn (string $context): bool => $context == 'create')
               ->password()
               ->maxLength(255),
+            TextInput::make('phone'),
+            TextInput::make('address'),
           ])
       ]);
   }

@@ -1,0 +1,1 @@
+<button type="button" class="inline-flex items-start"> <x-heroicon-o-bell class="size-5"/> <span class="text-xs p-2 px-1 -translate-y-2 border text-primary font-medium rounded-md leading-[0] bg-primary-foreground">{{ $unreadNotificationsCount }}</span> </button>

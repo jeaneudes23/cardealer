@@ -83,7 +83,7 @@ $loadMore = function () {
     @endforelse
     </div>
     @if ($reviews->count() < $car->reviews_count && $reviews->count() > 0)
-    <button wire:click="loadMore" class="justify-self-center rounded-md bg-foreground px-6 py-2 font-medium tracking-wide text-secondary-foreground inline-flex items-center gap-2">
+    <button wire:click="loadMore" class="justify-self-center rounded-md bg-foreground px-6 py-2 font-medium tracking-wide text-primary-foreground inline-flex items-center gap-2">
       <span wire:loading wire:target="loadMore"><x-lucide-loader-circle class="size-5 animate-spin"/></span>
       More Reviews
     </button>
@@ -108,7 +108,7 @@ $loadMore = function () {
         </div>
       </div>
       <div>
-        <button class="rounded-md bg-secondary px-6 py-2 font-medium tracking-wide text-secondary-foreground inline-flex items-center gap-2">
+        <button class="rounded-md bg-primary px-6 py-2 font-medium tracking-wide text-primary-foreground inline-flex items-center gap-2">
           <span wire:loading wire:target="createReview"><x-lucide-loader-circle class="size-5 animate-spin"/></span>
           Submit
         </button>

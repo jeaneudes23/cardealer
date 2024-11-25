@@ -34,11 +34,12 @@ export default {
         header: ['Oswald', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        ...colors,
         background: colors.white,
         foreground: colors.gray[800],
         muted: {DEFAULT: colors.gray[400], background: colors.gray[200]},
         info: 'rgba(32,181,229, <alpha-value>)',
-        secondary: {DEFAULT: colors.orange[600], foreground: colors.gray[50] ,...colors.orange}
+        primary: {DEFAULT: colors.orange[600], foreground: colors.gray[50] ,...colors.orange}
       }
     },
   },

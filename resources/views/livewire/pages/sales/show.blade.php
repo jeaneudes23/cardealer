@@ -21,7 +21,7 @@ $setTab = function ($t) {
   {{-- Header --}}
   <div class="space-y-6">
     <div class="flex items-center gap-2 text-lg font-medium">
-      <a wire:navigate href="{{ route('cars.index') }}" class="text-secondary hover:underline">Cars</a>
+      <a wire:navigate href="{{ route('cars.index') }}" class="text-primary hover:underline">Cars</a>
       <span><x-heroicon-o-chevron-right class="size-5" /></span>
       <a wire:navigate href="{{ route('cars.show', $listing->car->slug) }}"
          class="hover:underline">{{ $listing->car->name }}</a>
@@ -72,19 +72,19 @@ $setTab = function ($t) {
             </div>
           </div>
           <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
-            <div class="grid gap-1 items-start p-4 bg-secondary-50 rounded-lg text-xl">
+            <div class="grid gap-1 items-start p-4 bg-primary-50 rounded-lg text-xl">
               <div class="font-semibold flex justify-between gap-2"><span>Price</span> <span class="text-red-600 text-sm font-medium">Negotiable</span></div>
               <p class="text-gray-500">{{ number_format($listing->price,0,',','.') }} <span class="uppercase">{{$listing->currency}}</span></p>  
             </div>
-            <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
+            <div class="grid gap-1 content-start p-4 bg-primary-50 rounded-lg text-xl">
               <div class="font-semibold">Condition</div>
               <p class="text-gray-500">{{$listing->condition}}</p>
             </div>
-            <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
+            <div class="grid gap-1 content-start p-4 bg-primary-50 rounded-lg text-xl">
               <div class="font-semibold">Vehicle Id</div>
               <p class="text-gray-500 line-clamp-1">{{$listing->vin}}</p>
             </div>
-            <div class="grid gap-1 content-start p-4 bg-secondary-50 rounded-lg text-xl">
+            <div class="grid gap-1 content-start p-4 bg-primary-50 rounded-lg text-xl">
               <div class="font-semibold">Mileage</div>
               <p class="text-gray-500">{{$listing->mileage}}</p>
             </div>
@@ -94,7 +94,7 @@ $setTab = function ($t) {
               <x-lucide-external-link class="size-5"/>
               More Details
             </a>
-            <a href="#appointment" class="p-2 font-semibold capitalize text-secondary hover:underline inline-flex items-center gap-2">
+            <a href="#appointment" class="p-2 font-semibold capitalize text-primary hover:underline inline-flex items-center gap-2">
               <x-lucide-calendar class="size-5"/>
               Request an appointment
             </a>
@@ -121,11 +121,11 @@ $setTab = function ($t) {
     </div>
     <div class="sticky top-24 grid gap-2">
       <div class="grid gap-1">
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary" href="#car-details"><x-lucide-chevron-right class="size-5" />Car Details</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary" href="#gallery"><x-lucide-chevron-right class="size-5" />Gallery</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary" href="#overview"><x-lucide-chevron-right class="size-5" />Overview</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary" href="#appointment"><x-lucide-chevron-right class="size-5" />Request Appointment ?</a>
-        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-secondary" href="#recommendations"><x-lucide-chevron-right class="size-5" />Recommended</a>
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary" href="#car-details"><x-lucide-chevron-right class="size-5" />Car Details</a>
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary" href="#gallery"><x-lucide-chevron-right class="size-5" />Gallery</a>
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary" href="#overview"><x-lucide-chevron-right class="size-5" />Overview</a>
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary" href="#appointment"><x-lucide-chevron-right class="size-5" />Request Appointment ?</a>
+        <a class="inline-flex items-center gap-1 font-medium capitalize text-gray-500 transition-colors hover:text-primary" href="#recommendations"><x-lucide-chevron-right class="size-5" />Recommended</a>
       </div>
     </div>
   </div>

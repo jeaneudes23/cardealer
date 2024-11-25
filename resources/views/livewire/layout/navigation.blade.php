@@ -88,7 +88,7 @@ new class extends Component {
         </div>
     </div> --}}
   <div class="container flex h-16 items-center gap-16 ">
-    <a href="/" wire:navigate class="text-secondary font-bold uppercase text-lg tracking-tighter">{{ env('APP_NAME', 'APP') }}</a>
+    <a href="/" wire:navigate class="text-primary font-bold uppercase text-lg tracking-tighter">{{ env('APP_NAME', 'APP') }}</a>
     <div class="flex items-center gap-6">
       <div class="group hidden lg:block">
         <div class="inline-flex cursor-pointer items-center gap-4">
@@ -141,9 +141,10 @@ new class extends Component {
         </div>
         @guest
         <a href="{{ route('login') }}" wire:navigate class="px-2 font-medium capitalize">Login</a>
-        <a href="{{ route('register') }}" wire:navigate class="bg-secondary px-6 py-2 font-medium capitalize tracking-wide text-secondary-foreground">Register</a>
+        <a href="{{ route('register') }}" wire:navigate class="bg-primary px-6 py-2 font-medium capitalize tracking-wide text-primary-foreground">Register</a>
         @endguest
         @auth
+        @livewire('database-notifications')
         <a href="{{ route('appointments.index') }}" wire:navigate class="px-2 font-medium capitalize">Appointments</a>
         <div class="group hidden lg:block">
           <div class="inline-flex cursor-pointer items-center gap-4">

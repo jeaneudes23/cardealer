@@ -3,6 +3,7 @@
 namespace App\Filament\SalesPerson\Resources\AppointmentResource\Pages;
 
 use App\Filament\SalesPerson\Resources\AppointmentResource;
+use App\Models\User;
 use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Actions\Action;
@@ -11,6 +12,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Livewire\Notifications;
+use Filament\Notifications\Actions\Action as ActionsAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -35,6 +37,7 @@ class ViewAppointment extends ViewRecord
                   'completed' => 'Completed'
                 ])
                 ->native(0)
+                ->required()
                 ->default('pending'),
               DateTimePicker::make('date')
               ->required()
@@ -51,6 +54,14 @@ class ViewAppointment extends ViewRecord
             ->title("Feeback sent to customer")
             ->success()
             ->send();
+          Notification::make()
+            ->title("Booking Update")
+            ->success()
+            ->actions([
+              ActionsAction::make('view')
+              ->url(route('appointments.index'))
+            ])
+            ->sendToDatabase(User::find($this->getRecord()->customer_id));
           $this->refreshFormData(['status','sales_person_message','date']);
         })
         ->successRedirectUrl(fn () => AppointmentResource::getUrl('view', ['record' => $this->getRecord()->id]))

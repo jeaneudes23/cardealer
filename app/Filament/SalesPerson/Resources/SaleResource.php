@@ -6,12 +6,15 @@ use App\Filament\SalesPerson\Resources\SaleResource\Pages;
 use App\Filament\SalesPerson\Resources\SaleResource\RelationManagers;
 use App\Models\Sale;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class SaleResource extends Resource
 {
@@ -19,38 +22,54 @@ class SaleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
+    public static function getNavigationBadge(): ?string
+    {
+      return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('car_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('customer_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('staff_id')
-                    ->required()
-                    ->numeric(),
+              Section::make()
+              ->columns(2)
+              ->schema([
+                Forms\Components\Select::make('listing_id')
+                  ->relationship('listing', 'title')
+                  ->searchable()
+                  ->preload()
+                  ->required(),
+                Forms\Components\Select::make('customer_id')
+                  ->relationship('customer', 'name')
+                  ->createOptionForm(fn ($form) => CustomerResource::form($form))
+                  ->searchable()
+                  ->preload()
+                  ->required(),
+                Hidden::make('sales_person_id')
+                ->default(Auth::user()->id),
                 Forms\Components\TextInput::make('sale_price')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DatePicker::make('sale_date')
-                    ->required(),
+                  ->required()
+                  ->minValue(0)
+                  ->maxValue(2147483647)
+                  ->prefix('RWF')
+                  ->numeric(),
+                Forms\Components\DateTimePicker::make('sale_date')
+                  ->default(now())
+                  ->required(),
+              ])
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('sales_person_id', Auth::user()->id))
             ->columns([
-                Tables\Columns\TextColumn::make('car_id')
+                Tables\Columns\TextColumn::make('listing.title')
+                ->wrap()
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('customer_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('staff_id')
+                Tables\Columns\TextColumn::make('customer.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sale_price')
