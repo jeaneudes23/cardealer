@@ -26,7 +26,8 @@ class SalesPersonPanelProvider extends PanelProvider
             ->id('sales-person')
             ->login()
             ->spa()
-            ->path('sales-person')
+            ->databaseNotifications()
+            ->path('manager')
             ->colors([
                 'primary' => Color::Amber,
             ])

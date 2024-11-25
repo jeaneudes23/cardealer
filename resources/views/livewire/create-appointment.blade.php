@@ -47,7 +47,8 @@ new class extends Component implements HasForms {
           TextInput::make('email')
           ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
           DateTimePicker::make('date')->required()->default(now()->addDays(2))->minDate(now()->addDays(2)),
-          Textarea::make('message'),
+          Textarea::make('customer_message')
+          ->label('message'),
         ])
       ])
       ->statePath('data');
@@ -74,7 +75,7 @@ new class extends Component implements HasForms {
     $appointment = Appointment::create([
       'customer_id' => $customer->id,
       'date' => $this->data['date'],
-      'message' => $this->data['message'],
+      'customer_message' => $this->data['customer_message'],
       'car_id' => $this->car->id
     ]);
     

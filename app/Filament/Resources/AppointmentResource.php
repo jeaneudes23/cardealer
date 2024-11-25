@@ -40,7 +40,9 @@ class AppointmentResource extends Resource
               ->searchable(),
             Forms\Components\DateTimePicker::make('date')
               ->required(),
-            Forms\Components\Textarea::make('message')
+            Forms\Components\Textarea::make('customer_message')
+              ->columnSpanFull(),
+            Forms\Components\Textarea::make('sales_person_message')
               ->columnSpanFull(),
             Forms\Components\Select::make('status')
               ->options([

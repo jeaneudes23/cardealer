@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('car_id')->nullable()->constrained('cars')->onDelete('cascade');
             $table->foreignId('sales_person_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamp('date');
-            $table->text('message')->nullable();
+            $table->text('customer_message')->nullable();
+            $table->text('sales_person_message')->nullable();
             $table->enum('status',['pending','scheduled', 'cancelled','completed'])->default('pending');
             $table->timestamps();
         });

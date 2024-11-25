@@ -26,8 +26,8 @@ Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 Volt::route('cars', 'pages.cars.index')->name('cars.index');
 Volt::route('cars/{slug}', 'pages.cars.show')->name('cars.show');
-Volt::route('sales', 'pages.sales.index')->name('sales.index');
-Volt::route('sales/{id}', 'pages.sales.show')->name('sales.show');
+Volt::route('cars-for-sale', 'pages.sales.index')->name('sales.index');
+Volt::route('cars-for-sale/{id}', 'pages.sales.show')->name('sales.show');
 Volt::route('compare', 'pages.compare')->name('compare');
 Volt::route('appointments', 'pages.appointments.index')->middleware('auth')->name('appointments.index');
 

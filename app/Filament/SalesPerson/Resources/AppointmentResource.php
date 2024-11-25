@@ -2,6 +2,7 @@
 
 namespace App\Filament\SalesPerson\Resources;
 
+use App\Filament\Resources\AppointmentResource as ResourcesAppointmentResource;
 use App\Filament\SalesPerson\Resources\AppointmentResource\Pages;
 use App\Filament\SalesPerson\Resources\AppointmentResource\RelationManagers;
 use App\Models\Appointment;
@@ -38,53 +39,12 @@ class AppointmentResource extends Resource
   
   public static function form(Form $form): Form
   {
-    return $form
-      ->schema([
-        Forms\Components\Select::make('customer_id')
-          ->relationship('customer', 'name')
-          ->required(),
-        Forms\Components\Select::make('car_id')
-          ->relationship('car', 'name'),
-        Forms\Components\Select::make('sales_person_id')
-          ->relationship('salesPerson', 'name'),
-        Forms\Components\DateTimePicker::make('date')
-          ->required(),
-        Forms\Components\Textarea::make('message')
-          ->columnSpanFull(),
-        Forms\Components\TextInput::make('status')
-          ->required(),
-      ]);
+    return ResourcesAppointmentResource::form($form);
   }
 
   public static function table(Table $table): Table
   {
-    return $table
-      ->columns([
-        Tables\Columns\TextColumn::make('customer.name')
-          ->numeric()
-          ->sortable(),
-        Tables\Columns\TextColumn::make('car.name')
-          ->numeric()
-          ->sortable(),
-        Tables\Columns\TextColumn::make('salesPerson.name')
-          ->numeric()
-          ->sortable(),
-        Tables\Columns\TextColumn::make('date')
-          ->dateTime()
-          ->sortable(),
-        Tables\Columns\TextColumn::make('status'),
-        Tables\Columns\TextColumn::make('created_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-        Tables\Columns\TextColumn::make('updated_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-      ])
-      ->filters([
-        //
-      ])
+    return ResourcesAppointmentResource::table($table)
       ->actions([
         Tables\Actions\ViewAction::make(),
         Tables\Actions\EditAction::make(),
