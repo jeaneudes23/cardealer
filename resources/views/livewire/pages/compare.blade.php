@@ -281,7 +281,7 @@ $resetCars = function ($car) {
   </div>
 
   {{-- Transmission --}}
-  <div x-data="{open: true}">
+  <div x-data="{open: true}"> 
     <button @click="open = !open" class="w-full flex justify-between items-center py-4 border-t">
       <h3 class="text-xl font-semibold ">Transmission</h3>
       <x-lucide-chevron-down class="size-6"/>

@@ -29,7 +29,7 @@ new class extends Component implements HasForms {
   use InteractsWithForms;
 
   public ?array $data = [];
-  public Car $car;
+  public ?Car $car = null;
 
   public function mount(): void
   {
@@ -46,7 +46,7 @@ new class extends Component implements HasForms {
           TextInput::make('name')->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
           TextInput::make('email')
           ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
-          DateTimePicker::make('date')->required()->default(now()->addDays(2))->minDate(now()->addDays(2)),
+          DateTimePicker::make('date')->required()->default(now()->addDays(2)->endOfDay())->minDate(now()->addDays(2)->startOfDay()),
           Textarea::make('customer_message')
           ->label('message'),
         ])
@@ -76,7 +76,7 @@ new class extends Component implements HasForms {
       'customer_id' => $customer->id,
       'date' => $this->data['date'],
       'customer_message' => $this->data['customer_message'],
-      'car_id' => $this->car->id
+      'car_id' => $this->car?->id
     ]);
     
     Notification::make()

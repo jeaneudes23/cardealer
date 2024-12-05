@@ -4,6 +4,7 @@ namespace App\Filament\SalesPerson\Resources\AppointmentResource\Pages;
 
 use App\Filament\SalesPerson\Resources\AppointmentResource;
 use App\Models\User;
+use App\Notifications\AppointmentUpdate;
 use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Actions\Action;
@@ -49,6 +50,8 @@ class ViewAppointment extends ViewRecord
             ])
         ])
         ->action(function(array $data) {
+          /** @var User $customer */
+          $customer = User::find($this->getRecord()->customer_id);
           $this->getRecord()->update($data);
           Notification::make()
             ->title("Feeback sent to customer")
@@ -61,8 +64,9 @@ class ViewAppointment extends ViewRecord
               ActionsAction::make('view')
               ->url(route('appointments.index'))
             ])
-            ->sendToDatabase(User::find($this->getRecord()->customer_id));
+            ->sendToDatabase($customer);
           $this->refreshFormData(['status','sales_person_message','date']);
+          $customer->notify(new AppointmentUpdate($this->getRecord()));
         })
         ->successRedirectUrl(fn () => AppointmentResource::getUrl('view', ['record' => $this->getRecord()->id]))
     ];

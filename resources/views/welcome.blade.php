@@ -77,4 +77,7 @@
             @endforeach
         </div>
     </div>
+    <div class="my-section container">
+      <livewire:create-appointment />
+    </div>
 </x-app-layout>
