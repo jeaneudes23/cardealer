@@ -88,7 +88,7 @@ new class extends Component {
         </div>
     </div> --}}
   <div class="container flex h-16 items-center gap-16 ">
-    <a href="/" wire:navigate class="text-primary font-bold uppercase text-lg tracking-tighter">{{ env('APP_NAME', 'APP') }}</a>
+    <a href="/" wire:navigate class=" text-primary font-bold uppercase text-lg tracking-tighter">{{ env('APP_NAME', 'APP') }}</a>
     <div class="flex items-center gap-6">
       <div class="group hidden lg:block">
         <div class="inline-flex cursor-pointer items-center gap-4">
@@ -212,5 +212,15 @@ new class extends Component {
 
     const path = window.location.pathname
     path === '/' && observer.observe(pageTop)
+
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6738eab42480f5b4f59f11d3/1icr59ks6';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
   </script>
 @endscript

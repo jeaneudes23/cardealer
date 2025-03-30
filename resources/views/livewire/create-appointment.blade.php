@@ -45,6 +45,8 @@ new class extends Component implements HasForms {
         ->schema([
           TextInput::make('name')->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
           TextInput::make('email')
+          ->email()
+          ->endsWith('.com')
           ->visible(fn(): bool => !Auth::check())->required(fn(): bool => !Auth::check()),
           DateTimePicker::make('date')->required()->default(now()->addDays(2)->endOfDay())->minDate(now()->addDays(2)->startOfDay()),
           Textarea::make('customer_message')
@@ -56,6 +58,7 @@ new class extends Component implements HasForms {
 
   public function create()
   {
+    $this->validate();
     $customer = Auth::user();
     $message = "You will be updated on the status of your appointment";
     if (!$customer) {

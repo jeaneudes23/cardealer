@@ -1,8 +1,8 @@
 @props(['listing'])
 
 <a href="{{ route('sales.show', $listing->id) }}" wire:navigate class="shadow-xl rounded-md overflow-hidden">
-  <div class="relative w-full aspect-video self-start justify-start bg-green-600">
-    <img src="{{ asset('storage/' . $listing->cover_image) }}" class="absolute w-full h-full object-cover" alt="{{ $listing->title }}">
+  <div class="relative w-full aspect-video self-start justify-start  bg-gray-100">
+    <img src="{{ asset('storage/' . $listing->cover_image) }}" class="absolute w-full h-full object-cover">
     @if ($listing->is_negotiable)
       <div class="absolute left-0 top-0 bg-primary p-2 text-xs font-semibold text-primary-foreground">Negotiable
       </div>

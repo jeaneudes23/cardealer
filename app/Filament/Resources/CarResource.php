@@ -46,7 +46,8 @@ class CarResource extends Resource
                 Select::make('brand_id')
                   ->relationship('brand', 'name')
                   ->searchable()
-                  ->preload(),
+                  ->preload()
+                  ->required(),
                 Select::make('car_model_id')
                   ->preload()
                   ->relationship(name: 'model', titleAttribute: 'name', modifyQueryUsing: fn(Builder $query, Get $get) => $query->where('brand_id', $get('brand_id')))

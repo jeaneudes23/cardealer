@@ -37,7 +37,6 @@ class CarModelResource extends Resource
               ->required()
               ->unique(ignoreRecord:true)
               ->maxLength(255),
-            Toggle::make('is_featured'),
           ])
       ]);
   }

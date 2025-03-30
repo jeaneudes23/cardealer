@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
@@ -22,6 +23,8 @@ Route::get('/', function(){
 // Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
+Route::get('report', [ReportController::class, 'index'])->name('report.index');
+
 
 
 Volt::route('cars', 'pages.cars.index')->name('cars.index');
